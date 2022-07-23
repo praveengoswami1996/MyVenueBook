@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Edit Administrator Page</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/editAdministratorPage.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="edit-administrator-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="http://localhost:8000/administrator/viewalladministrator/">View All Administrator</a> / <a href="#">Edit Administrator</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Update Administrator Process</h1>
+        </div>
+
+        <div class="signup-form-container">
+            <form action="http://localhost:8000/administrator/updateadministrator/" method="post" name="myform" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="image-div-container">
+                    <div class="profile-image-container">
+                        <img src="{{admin.adminImage.url}}" alt="Admin Profile Image" id="adminprofileimage">
+                        <input type="hidden" name="previousprofileimage" value="{{admin.adminImage}}">
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="adminprofileimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Admin ID Field-->
+                <label for="adminid">Admin ID </label>
+                <input type="text" id="adminid" name="adminid" value="{{admin.adminId}}" readonly>
+
+                <!--Admin Name Field-->
+                <label for="adminname">Name </label>
+                <input type="text" id="adminname" name="adminname" value="{{admin.adminName}}">
+                <label class="errormsg"></label>
+                
+                <!--Admin Date of Birth Field-->
+                <label for="admindob">Date of Birth </label>
+                <div class="dob-field-container">
+                    <input type="text" value="{{admin.adminDob}}"  id="previousdob" name="previousdob" readonly>
+                    <input type="date" id="admindob" name="admindob">
+                </div>
+                <input type="hidden" name="previousdobdate" id="previousdobdate">
+
+                <!--Admin Gender Field-->
+                <label for="admingender">Gender </label>
+                <input name="previousgendervalue" type="text" value="{{admin.adminGender}}" readonly>
+                <span>Male</span><input type="radio" id="admingender" name="admingender" value="Male">
+                <span>Female</span><input type="radio" id="admingender" name="admingender" value="Female">
+                <span>Other</span><input type="radio" id="admingender" name="admingender" value="Other">
+
+                <!--Admin Designation Field-->
+                {% if admin.adminDesignation == 'Founder' %}
+                <label for="admindesignation">Designation </label>
+                <select  id="admindesignation" name="admindesignation" required>
+                    <option value="Founder">Founder</option>
+                    <option value="Director">Director</option>
+                    <option value="Manager">Manager</option>
+                </select>
+                {% elif admin.adminDesignation == 'Director'%}
+                <label for="admindesignation">Designation </label>
+                <select  id="admindesignation" name="admindesignation" required>
+                    <option value="Director">Director</option>
+                    <option value="Founder">Founder</option>
+                    <option value="Manager">Manager</option>
+                </select>
+                {% elif admin.adminDesignation == 'Manager'%}
+                <label for="admindesignation">Designation </label>
+                <select  id="admindesignation" name="admindesignation" required>
+                    <option value="Manager">Manager</option>
+                    <option value="Director">Director</option>
+                    <option value="Founder">Founder</option>
+                </select>
+                {% endif %}
+
+                <!--Admin Email Field-->
+                {% if email_error %}
+
+                <label for="adminemail">Email </label>
+                <input style="border:.1rem solid red;" type="email" id="adminemail" name="adminemail" value="{{admin.adminEmail}}" oninput="validateEmail()">
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{email_error}}</label>
+                
+                {% else %}
+    
+                <label for="adminemail">Email </label>
+                <input type="email" id="adminemail" name="adminemail" value="{{admin.adminEmail}}" oninput="validateEmail()">
+                <label class="errormsg"></label>
+
+                {% endif %}
+
+                <!--Admin Contact Number Field-->
+                {% if mobile_error %}
+                <label for="adminmobilenumber">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="adminmobilecountrycode">
+                        <option value="{{admin.adminMobileCountryCode}}">{{admin.adminMobileCountryCode}}</option>
+                    </select>
+                    <input style="border:.1rem solid red;" type="text" id="adminmobilenumber" name="adminmobilenumber" value="{{admin.adminMobileNumber}}">
+                </div>
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{mobile_error}}</label>
+                {% else %}
+                <label for="adminmobilenumber">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="adminmobilecountrycode">
+                        <option value="{{admin.adminMobileCountryCode}}">{{admin.adminMobileCountryCode}}</option>
+                    </select>
+                    <input type="text" id="adminmobilenumber" name="adminmobilenumber" value="{{admin.adminMobileNumber}}">
+                </div>
+                <label class="errormsg"></label>
+                {% endif %}
+
+                <!--Admin Address Field-->
+                <label for="adminaddress">Address </label>
+                <input type="text" id="adminaddress" name="adminaddress" value="{{admin.adminAddress}}">
+                <label class="errormsg"></label>
+
+                <!--Admin Username Field-->
+                {% if username_error %}
+                <label for="adminusername">Username </label>
+                <input style="border:.1rem solid red;" type="text" id="adminusername" name="adminusername" value="{{admin.adminUsername}}" oninput="validateUsername()">
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{username_error}}</label>
+                {% else %}
+                <label for="adminusername">Username </label>
+                <input type="text" id="adminusername" name="adminusername" value="{{admin.adminUsername}}" oninput="validateUsername()">
+                <label class="errormsg"></label>
+                {% endif %}
+
+                <!--Customer Password Field-->
+                <label for="adminpassword">Password </label>
+                <input type="text" id="adminpassword" name="adminpassword" value="{{admin.adminPassword}}">
+
+                <input type="submit" value="Update Administrator">
+
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/editAdministratorPage.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

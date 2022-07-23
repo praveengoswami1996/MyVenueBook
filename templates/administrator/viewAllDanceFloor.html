@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Dance Floors List</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllDanceFloor.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-dancefloor-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Dance Floors</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Dance Floors at MyVenueBook.Com</h1>
+        </div>
+        <div class="dancefloor-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Dance Floor Image</th>
+                    <th>Dance Floor Id</th>
+                    <th>Dance Floor Type</th>
+                    <th>Dance Floor Description</th>
+                    <th>Dance Floor Price per Day of Booking</th>
+                    <th>Dance Floor Code</th>
+                </tr>
+                {% for dancefloor in alldancefloors %}
+                <tr class="table-value">
+                    <td class="dancefloorimage"><img src="{{dancefloor.danceFloorImage.url}}" alt="Dance Floor Image"></td>
+                    <td class="centeralign">{{dancefloor.danceFloorId}}</td>
+                    <td class="centeralign">{{dancefloor.danceFloorType}}</td>
+                    <td class="centeralign">{{dancefloor.danceFloorDescription}}</td>
+                    <td class="centeralign">{{dancefloor.danceFloorPricePerBooking}}</td>
+                    <td class="centeralign">{{dancefloor.danceFloorCode}}</td>
+                    <td class="centeralign button"><a id="editbutton" href="http://localhost:8000/administrator/editdancefloor/{{dancefloor.danceFloorId}}/">Edit</a></td>
+                    <td class="centeralign button"><a id="deletebutton" href="http://localhost:8000/administrator/deletedancefloor/{{dancefloor.danceFloorId}}/">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} 
+    <title>MyVenueBook - HomePage</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+    <link rel="stylesheet" href="{% static 'css/customer/index.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+
+    <!--header section starts-->
+    {% block header %}
+    <header>
+        <a href="#home" class="logo">myVenueBook<span>.</span></a>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="http://localhost:8000/" class="active-home">Home</a></li>
+                <li><a href="#venues">Venues</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#review">Review</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="http://localhost:8000/customer/loginform/">Login</a></li>
+            </ul>
+        </nav>
+
+        <div class="fas fa-bars"></div>
+
+    </header>
+    {% endblock header %}
+    <!--header section ends-->
+
+    <!--home section starts-->
+    {% block home %}
+    <section class="home" id="home">
+
+        <div class="hero-image">
+            <img src="{% static 'image/hero-image.jpg' %}" alt="Hero Image">
+        </div>
+
+        <div class="content">
+            <h1>Make your special day,<br>more special with My Venue Book.</h1>
+            <p id="signatureword">Getting confuse while booking a venue for your special day celebrations?? Just trust on My Venue Book and book your dream venue with us... </p>
+        </div>
+
+        <div class="form-container">
+            <form action="http://localhost:8000/venue/searchvenuebystate/" method="post">
+                {% csrf_token %}
+                <h3>Search a perfect venue</h3>
+                <label for="state">State</label>
+                <select class="state" id="state" onchange="insertOptions('state', 'city')" name="venuestate" required>
+                    <option value="">---Select your state---</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Paschim Bengal">Paschim Bengal</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                </select>
+
+                <label for="city">City</label>
+                <select class="city" id="city" name="venuecity" required>
+                    <option value="">---Select your city---</option>
+                </select>
+
+                <input type="submit" value="Search">
+            </form>
+            
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!-- feature section starts  -->
+    {% block feature %}
+    <section class="feature" id="venues">
+
+        <h1 class="heading"><span>f</span>eatured <span>V</span>enues</h1>
+        
+        <div class="card-container">
+            <div class="card">
+                <img src="{{venue1.venueImage.url}}" alt="Venue Image">
+                <div class="content">
+                    <h3 class="title">{{venue1.venueCity}}</h3>
+                    <p>{{venue1.venueDescription}}</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="http://localhost:8000/booking/bookvenueform/{{venue1.venueName}}/"><button class="btn">Book Now!</button></a>
+                </div>
+            </div>
+    
+            <div class="card">
+                <img src="{{venue2.venueImage.url}}" alt="">
+                <div class="content">
+                    <h3 class="title">{{venue2.venueCity}}</h3>
+                    <p>{{venue2.venueDescription}}</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="http://localhost:8000/booking/bookvenueform/{{venue2.venueName}}/"><button class="btn">Book Now!</button></a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{{venue3.venueImage.url}}" alt="">
+                <div class="content">
+                    <h3 class="title">{{venue3.venueCity}}</h3>
+                    <p>{{venue3.venueDescription}}</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="http://localhost:8000/booking/bookvenueform/{{venue3.venueName}}/"><button class="btn">Book Now!</button></a>
+                </div>
+            </div>
+    </div>
+    </section>
+    {% endblock feature %}
+    <!-- feature section ends -->
+    
+    <!-- about section starts  -->
+    {% block about %}
+    <section id="about" class="about">
+    
+    <h1 class="heading"><span>a</span>bout <span>u</span>s</h1>
+    
+    <div class="row">
+    
+        <div class="image">
+            <img src="{% static 'image/about.png'%}" alt="">
+        </div>
+    
+        <div class="content">
+            <h3>why choose us?</h3>
+            <p>"My Venue Book" is an web application which provides online Venue Booking Services for celebrating different type of events. My Venue Book provides a hassale free experience of booking venues and availing other event related services</p><br>
+            <p>We are currently at the top of all the venue service providers in the country. </p>
+            <a href="#"><button class="btn btn1">read more</button></a>
+            <a href="#venues"><button class="btn">get started</button></a>
+        </div>
+    
+    </div>
+    
+    </section>
+    {% endblock about %}
+    <!-- about section ends -->
+    
+    <!-- gallery section starts  -->
+    {% block gallery %}
+    <section id="gallery" class="gallery">
+    
+    <h1 class="heading"><span>g</span>allery</h1>
+    
+    <div class="box-container">
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-1.jpg' %}" alt="Gallery Image 1">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-2.jpg' %}" alt="Gallery Image 2">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-3.jpg' %}" alt="Gallery Image 3">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-4.jpg'%}" alt="Gallery Image 4">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-5.jpg' %}" alt="Gallery Image 5">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="{% static 'image/gallery-6.jpg'%}" alt="Gallery Image 6">
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-search"></a>
+            </div>
+        </div>
+    
+    </div>
+    
+    </section>
+    {% endblock gallery %}
+    <!-- gallery section ends -->
+    
+    <!-- review section starts  -->
+    {% block review %}
+    <section id="review" class="review">
+    
+    <h1 class="heading"><span>r</span>eview</h1>
+    
+    
+    <div class="box-container">
+    
+        <div class="box">
+            <div class="image">
+                <img src="{% static 'image/review-1.png' %}" alt="">
+            </div>
+            <div class="content">
+                <h3>Shruti Singhania</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ex labore odio fuga doloremque sequi in asperiores ea, nisi ullam?</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    
+        <div class="box">
+            <div class="image">
+                <img src="{% static 'image/review-2.png' %}" alt="">
+            </div>
+            <div class="content">
+                <h3>Abhishek Kapoor</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ex labore odio fuga doloremque sequi in asperiores ea, nisi ullam?</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+        </div>
+    
+        <div class="box">
+            <div class="image">
+                <img src="{% static 'image/review-3.png' %}" alt="">
+            </div>
+            <div class="content">
+                <h3>Anushka Sharma</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ex labore odio fuga doloremque sequi in asperiores ea, nisi ullam?</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+    </section>
+    {% endblock review %}
+    <!-- review section ends -->
+    
+    <!-- contact section starts  -->
+    {% block contact %}
+    <section id="contact" class="contact">
+    
+    <h1 class="heading"><span>c</span>ontact <span>u</span>s</h1>
+    
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.8392304288!2d77.06889692223511!3d28.52758200688075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1652285401999!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" tabindex="0" aria-hidden="false" frameborder="0">
+    </iframe>
+    
+    <div class="row">
+    
+    <div class="contact-info">
+    
+        <div class="box">
+            <h3> <i class="fas fa-home"></i> address </h3>
+            <p>New Delhi, <br>
+            Delhi, <br>
+            110059.</p>
+        </div>
+    
+        <div class="box">
+            <h3> <i class="fas fa-envelope"></i> e-mail </h3>
+            <p>praveen828589@gmail.com</p>
+        </div>
+    
+        <div class="box">
+            <h3> <i class="fas fa-phone"></i> phone </h3>
+            <p>+91-8700624614</p>
+        </div>
+    
+    </div>
+    
+    <div class="contact-form-container">
+    
+        <form action="http://localhost:8000/enquirymessage/" method="post">
+            {% csrf_token %}
+            <h3>get in touch</h3>
+    
+            <div class="inputBox">
+                <input type="text" name="sendername" placeholder="full name" required>
+                <input type="email" name="senderemail" placeholder="e-mail" required>
+            </div>
+    
+            <input type="hidden" value="Not Replied" name="messagestatus">
+            <textarea name="sendermessage" cols="30" rows="10" placeholder="message" required></textarea>
+    
+            <input type="submit" onclick="showMessage()" value="message">
+        </form>
+    
+    </div>
+    
+    </div>
+    
+    </section>
+    {% endblock contact %}
+    <!-- contact section ends -->
+    
+    <!--Footer Section starts-->
+    {% block footer %}   
+    <section class="footer">
+    
+    <h1 class="credit">created by <span>Praveen Goswami</span> | all rights reserved.</h1>
+
+    <div class="admin-login-button"><a href="http://localhost:8000/administrator/"><i class="fa-solid fa-user-gear"></i>Admin Login</a></div>
+    
+    <div class="icons">
+        <a href="https://www.facebook.com" class="fab fa-facebook-f" target="_blank"></a>
+        <a href="https://www.twitter.com" class="fab fa-twitter" target="_blank"></a>
+        <a href="https://www.instagram.com" class="fab fa-instagram" target="_blank"></a>
+        <a href="https://www.github.com" class="fab fa-github" target="_blank"></a>
+    </div>
+
+    <div class="move-to-top">
+        <a href="#home" class="fa-solid fa-circle-arrow-up"></a>
+    </div>
+    
+    </section>
+    {% endblock footer %}
+    <!--Footer Section ends-->
+    
+    <!--Jquery cdn link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+    <script src="{% static 'javascript/customer/index.js' %}"></script>
+    <script>
+        function showMessage(){
+            alert("Message submitted successfully.");
+        }
+    </script>
+    {% endblock JS %}
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Customer Invoice Record</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/customer/customerInvoiceRecord.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="invoice-record-home" id="home">
+
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / <a href="#">My Invoices</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">My Invoices</h1>
+        </div>
+        {% if invoices %}
+        <div class="invoice-record-container">
+            <table>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Booking ID</th>
+                    <th>Issued To</th>
+                    <th>Invoice Date</th>
+                    <th>Invoice Total Amount</th>
+                </tr>
+                {% for invoice in invoices %}
+                <tr>
+                    <td>{{invoice.invoiceId}}</td>
+                    <td>{{invoice.bookingId.bookingId}}</td>
+                    <td>{{invoice.invoiceName}}</td>
+                    <td>{{invoice.invoiceDate}}</td>
+                    <td>{{invoice.invoiceTotalAmount}}</td>
+                    <td id="button1"><a href="#" id="viewbutton"><i class="fa-solid fa-eye"></i> View</a></td>
+                    <td id="button2"><a href="#" id="downloadbutton"><i class="fa-solid fa-download"></i> Download</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="noinvoice">
+            <h1>You have no invoices.</h1>
+        </div>
+        {% endif %}
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

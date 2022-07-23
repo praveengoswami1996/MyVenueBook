@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Payments Record</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllPayment.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-payment-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Payment Record</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Payment Record at MyVenueBook.Com</h1>
+        </div>
+        <div class="payment-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Payment Id</th>
+                    <th>Booking Id</th>
+                    <th>Payment Amount</th>
+                    <th>Payment Date</th>
+                    <th>Payment Time</th>
+                    <th>Payment Mode</th>
+                    <th>Payment Status</th>
+                    <th>Card Number</th>
+                    <th>Card Expiry Month</th>
+                    <th>Card Expiry Year</th>
+                    <th>CVV Number</th>
+                    <th>Name on Card</th>
+                </tr>
+                {% for payment in allpayments %}
+                <tr class="table-value">
+                    <td class="centeralign">{{payment.paymentId}}</td>
+                    <td class="centeralign">{{payment.bookingId.bookingId}}</td>
+                    <td class="centeralign">{{payment.paymentAmount}}</td>
+                    <td class="centeralign">{{payment.paymentDate}}</td>
+                    <td class="centeralign">{{payment.paymentTime}}</td>
+                    <td class="centeralign">{{payment.paymentMode}}</td>
+                    <td class="centeralign">{{payment.paymentStatus}}</td>
+                    <td class="centeralign">{{payment.cardNumber}}</td>
+                    <td class="centeralign">{{payment.cardExpiryMonth}}</td>
+                    <td class="centeralign">{{payment.cardExpiryYear}}</td>
+                    <td class="centeralign">{{payment.cvvNumber}}</td>
+                    <td class="centeralign">{{payment.nameOnCard}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

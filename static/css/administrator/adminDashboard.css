@@ -1,0 +1,58 @@
+.admin-dashboard-home{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding:10rem 2.8rem;
+    background:#fff;
+}
+.admin-dashboard-home .administrator{
+    background-color: red;
+    color:#fff;
+    align-items: flex-start;
+    font-size:1.6rem;
+    padding:.5rem;
+    text-transform: none;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+}
+.admin-dashboard-home .main-heading{
+    background-color: navy;
+    text-align: center;
+    color:#fff;
+    width:30%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:4rem;
+    padding:1rem 0.8rem;
+    margin-top: 1.5rem;
+    border-radius:1.5rem;
+}
+.admin-dashboard-home .admin-dashboard-content{
+    margin-top:2rem;
+    width:100%;
+}
+.admin-dashboard-home .admin-dashboard-content h3{
+    font-size:2.5rem;
+    background:yellow;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    margin:.8rem 0rem;
+    width:30%;
+    padding-left:1rem;
+}
+.admin-dashboard-home .admin-dashboard-content .link-containers{
+    display: flex;
+    justify-content: space-around;
+    margin:1rem 0rem;
+}
+.admin-dashboard-home .admin-dashboard-content .link-containers a{
+    font-size: 2rem;
+    background:#0098a1;
+    color:#fff;
+    width:49%;
+    text-align:center;
+    border-radius:.8rem;
+    padding:.5rem 0rem;
+}

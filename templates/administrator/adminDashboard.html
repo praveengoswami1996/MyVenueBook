@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Admin Dashboard</title>
+    {% endblock title %}
+
+    <!--Custom CSS File Link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/adminDashboard.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    {% block home %}
+    <section class="admin-dashboard-home" id="home">
+
+        <h3 class="administrator">ADMINISTRATOR : {{request.session.adminUsername}}</h3>
+
+        <h1 class="main-heading">ADMIN DASHBOARD</h1>
+
+        <div class="admin-dashboard-content">
+            <h3>Admin Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/addadministratorform/">Add Admin</a>
+                <a href="http://localhost:8000/administrator/viewalladministrator/">View All Admins</a>
+            </div>
+        
+            <h3>Customer Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/addcustomerform/">Add Customer</a>
+                <a href="http://localhost:8000/administrator/viewallcustomer/">View All Customers</a>
+            </div>
+
+            <h3>Venue Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/addvenueform/">Add Venue</a>
+                <a href="http://localhost:8000/administrator/viewallvenue/">View All Venues</a>
+            </div>
+
+            <h3>Booking Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/viewallbooking/">View All Bookings</a>
+            </div>
+
+            <h3>Add-On Food Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/addfoodform/">Add Food</a>
+                <a href="http://localhost:8000/administrator/viewallfood/">View All Foods</a>
+            </div>
+
+            <h3>Add-On Dance Floor Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/adddancefloorform/">Add Dance Floor</a>
+                <a href="http://localhost:8000/administrator/viewalldancefloor/">View All Dance Floors</a>
+            </div>
+
+            <h3>Payment Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/viewallpayment/">View All Payment Records</a>
+            </div>
+
+            <h3>Invoice Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/viewallinvoice/">View All Invoice Records</a>
+            </div>
+
+            <h3>Feedback Table</h3>
+            <div class="link-containers">
+                <a href="http://localhost:8000/administrator/viewallfeedback/">View All Feedbacks</a>
+            </div>
+
+        </div>
+    </section>
+    {% endblock home %}
+</body>
+</html>

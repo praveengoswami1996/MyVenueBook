@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Customer Feedback Form</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/customer/customerFeedbackForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="feedback-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / Customer Feedback Process</p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Customer Feedback Process</h1>
+        </div>
+        <div class="adminfeedbackmsg">
+            <div>
+                <h1>We value your feedback.</h1>
+                <h3>Please fill the following form and help<br/>us improving our customer experience.</h3>
+            </div>
+        </div>
+        <div class="feedbackformcontainer">
+            <form action="http://localhost:8000/customer/submitfeedback/" method="POST" onsubmit="return validate()">
+            {% csrf_token %}
+            <label for="customerid">Customer ID</label>
+            <input type="text" id="customerid" name="customerid" value="{{customerId}}" readonly>
+
+            <label for="feedbacktype">Feedback Type</label>
+            <select id="feedbacktype" name="feedbacktype" required>
+                <option value="">---Select feedback type---</option>
+                <option value="Compliment">Compliment</option>
+                <option value="Suggestion">Suggestion</option>
+                <option value="Complaint">Complaint</option>
+            </select>
+
+            <label for="feedbackdescription">Feedback Description</label>
+            <textarea id="feedbackdescription" name="feedbackdescription" placeholder="Write your feedback..." rows="6" required></textarea>
+            <label class="errormsg"></label>
+
+            <input type="submit" value="Submit feedback">
+
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script>
+            function validate(){
+                let returnValue = true;
+                let feedbackDescriptionField = document.getElementById('feedbackdescription');
+                let feedbackDescription = feedbackDescriptionField.value.trim()
+                let errorMsgLabel = document.getElementsByClassName('errormsg');
+                if (feedbackDescription == '' || feedbackDescription == null){
+                    feedbackDescriptionField.style.border = ".1rem solid red";
+                    errorMsgLabel[0].innerHTML = "***You must enter some feedback.";
+                    errorMsgLabel[0].style.fontSize = "1.5rem";
+                    errorMsgLabel[0].style.textTransform = "none";
+                    errorMsgLabel[0].style.color = "red";
+                    returnValue = false;
+                }
+                else{
+                    alert("Feedback submitted successfully");
+                }
+                return returnValue
+            }
+        </script>
+    {% endblock JS %}
+</body>
+</html>

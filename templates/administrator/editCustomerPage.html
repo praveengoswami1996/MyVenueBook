@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Edit Customer</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/editCustomerPage.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="edit-customer-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="http://localhost:8000/administrator/viewallcustomer/">View All Customers</a> / <a href="#">Edit Customer</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Update Customer Process</h1>
+        </div>
+
+        <div class="signup-form-container">
+            <form action="http://localhost:8000/administrator/updatecustomer/" method="post" name="myform" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="image-div-container">
+                    <div class="profile-image-container">
+                        <img src="{{customer.customerImage.url}}" alt="Customer Profile Image" id="customerprofileimage">
+                        <input type="hidden" name="previousprofileimage" value="{{customer.customerImage}}">
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="customerprofileimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Customer ID Field-->
+                <label for="customerid">Customer ID </label>
+                <input type="text" id="customerid" name="customerid" value="{{customer.customerId}}" readonly>
+
+                <!--Customer Name Field-->
+                <label for="customername">Name </label>
+                <input type="text" id="customername" name="customername" value="{{customer.customerName}}">
+                <label class="errormsg"></label>
+                
+                <!--Customer Date of Birth Field-->
+                <label for="customerdob">Date of Birth </label>
+                <div class="dob-field-container">
+                    <input type="text" value="{{customer.customerDob}}"  id="previousdob" name="previousdob" readonly>
+                    <input type="date" id="customerdob" name="customerdob">
+                </div>
+                <input type="hidden" name="previousdobdate" id="previousdobdate">
+
+                <!--Customer Gender Field-->
+                <label for="customergender">Gender </label>
+                <input name="previousgendervalue" type="text" value="{{customer.customerGender}}" readonly>
+                <span>Male</span><input type="radio" id="customergender" name="customergender" value="Male">
+                <span>Female</span><input type="radio" id="customergender" name="customergender" value="Female">
+                <span>Other</span><input type="radio" id="customergender" name="customergender" value="Other">
+
+                <!--Customer Email Field-->
+                {% if email_error %}
+
+                <label for="customeremail">Email </label>
+                <input style="border:.1rem solid red;" type="email" id="customeremail" name="customeremail" value="{{customer.customerEmail}}" oninput="validateEmail()">
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{email_error}}</label>
+                
+                {% else %}
+    
+                <label for="customeremail">Email </label>
+                <input type="email" id="customeremail" name="customeremail" value="{{customer.customerEmail}}" oninput="validateEmail()">
+                <label class="errormsg"></label>
+
+                {% endif %}
+
+                <!--Customer Contact Number Field-->
+                {% if mobile_error %}
+                <label for="customermobilenumber">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="customermobilecountrycode">
+                        <option value="{{customer.customerMobileCountryCode}}">{{customer.customerMobileCountryCode}}</option>
+                    </select>
+                    <input style="border:.1rem solid red;" type="text" id="customermobilenumber" name="customermobilenumber" value="{{customer.customerMobileNumber}}">
+                </div>
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{mobile_error}}</label>
+                {% else %}
+                <label for="customermobilenumber">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="customermobilecountrycode">
+                        <option value="{{customer.customerMobileCountryCode}}">{{customer.customerMobileCountryCode}}</option>
+                    </select>
+                    <input type="text" id="customermobilenumber" name="customermobilenumber" value="{{customer.customerMobileNumber}}">
+                </div>
+                <label class="errormsg"></label>
+                {% endif %}
+
+                <!--Customer Address Field-->
+                <label for="customeraddress">Address </label>
+                <input type="textarea" id="customeraddress" name="customeraddress" value="{{customer.customerAddress}}">
+                <label class="errormsg"></label>
+
+                <!--Customer City Field-->
+                <label for="customercity">City </label>
+                <input type="text" id="customercity" name="customercity" value="{{customer.customerCity}}">
+                <label class="errormsg"></label>
+
+                <!--Customer State Field-->
+                <label for="customerstate">State </label>
+                <input type="text" id="customerstate" name="customerstate" value="{{customer.customerState}}">
+                <label class="errormsg"></label>
+
+                <!--Customer Pincode Field-->
+                <label for="customerpincode">Pincode </label>
+                <input type="text" id="customerpincode" name="customerpincode" value="{{customer.customerPincode}}">
+                <label class="errormsg"></label>
+
+                <!--Customer Username Field-->
+
+                {% if username_error %}
+                <label for="customerusername">Username </label>
+                <input style="border:.1rem solid red;" type="text" id="customerusername" name="customerusername" value="{{customer.customerUsername}}" oninput="validateUsername()">
+                <label class="errormsg"
+                style="color:red; font-size:1.5rem; text-transform:none;">{{username_error}}</label>
+                {% else %}
+                <label for="customerusername">Username </label>
+                <input type="text" id="customerusername" name="customerusername" value="{{customer.customerUsername}}" oninput="validateUsername()">
+                <label class="errormsg"></label>
+                {% endif %}
+
+                <!--Customer Password Field-->
+                <label for="customerpassword">Password </label>
+                <input type="text" id="customerpassword" name="customerpassword" value="{{customer.customerPassword}}">
+
+                <input type="submit" value="Save Details">
+
+            </form>
+        </div>
+        
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/editCustomerPage.js '%}"></script>
+    {% endblock JS %}
+</body>
+</html>

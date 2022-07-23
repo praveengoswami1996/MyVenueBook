@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Billing Process</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/payment/billingPageWithBookingDetails.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="billing-process-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / Billing Page</p>
+        </div>
+        <div class="booking-details-container">
+            <h1>A. Your Booking Details</h1>
+            <hr id="line" />
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Booking ID</th>
+                    <th>Customer ID</th>
+                    <th>Venue ID</th>
+                    <th hidden>Venue Price</th>
+                    <th>Event Type</th>
+                    <th>Booking Date and Time</th>
+                    <th>Booking Start Date</th>
+                    <th>Booking End Date</th>
+                    <th>Total Booking Days</th>
+                    <th>Booking Status</th>
+                </tr>
+                <tr class="table-content">
+                    <td>{{booking_details.bookingId}}</td>
+                    <td>{{booking_details.customerId.customerId}}</td>
+                    <td>{{booking_details.venueId.venueId}}</td>
+                    <td hidden id="venueprice">{{booking_details.venueId.venuePrice}}</td>
+                    <td>{{booking_details.eventType}}</td>
+                    <td>{{booking_details.bookingDateTime}}</td>
+                    <td>{{booking_details.bookingStartDate}}</td>
+                    <td>{{booking_details.bookingEndDate}}</td>
+                    <td id="bookingdays">{{booking_details.bookingDays}}</td>
+                    <td>{{booking_details.bookingStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="addon-details-container">
+            <h1>B. Your Add-On Food & Dance Floor (DJ) details </h1>
+            <hr id="line"/>
+            {% if addOnFoods %}
+            <table id="foodtable">
+                <tr class="table-heading">
+                    <th>Food Code</th>
+                    <th>Food Image</th>
+                    <th>Food Name</th>
+                    <th>Food Cuisine</th>
+                    <th>Price Per Serving</th>
+                    <th>Servings required Per day</th>
+                    <th>Food Amount Per Day</th>
+                    <th>Total Amount<br/><h6>(Amount Per Day X Booking Days)</h6></th>
+                    <th>Remove Food Item(s)</th>
+                </tr>
+                {% for addOnFood in addOnFoods %}
+                <tr class="table-content">
+                    <td>{{addOnFood.foodId.foodCode}}</td>
+
+                    <td id="image-column"><img class="food-image" src="{{addOnFood.foodId.foodImage.url}}" alt="Food Image"></td>
+
+                    <td>{{addOnFood.foodId.foodName}}</td>
+
+                    <td>{{addOnFood.foodId.foodCuisine}}</td>
+
+                    <td id="foodpriceperserving{{addOnFood.foodId.foodId}}">{{addOnFood.foodId.foodPricePerServing}}</td>
+                    
+                    <td><input oninput="calculateTotalFoodAmount(id)" type="number" min="1" placeholder="Number of Servings?" id="{{addOnFood.foodId.foodId}}"></td>
+
+                    <td><input type="number" id="foodamountperday{{addOnFood.foodId.foodId}}" readonly></td>
+
+                    <td><input type="number" id="totalamount{{addOnFood.foodId.foodId}}" readonly ></td>
+
+                    <td><a href="http://localhost:8000/payment/removefooditem/{{addOnFood.foodId.foodId}}/{{booking_details.bookingId}}/"><i class="fa-solid fa-circle-minus"></i></a></td>
+                </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td colspan="5" id="blank-column"></td>
+                    <td>Total</td>
+                    <td><input class="perdaytotal" type="text" readonly></td>
+                    <td><input class="completetotal-food" type="text" readonly></td>            
+                </tr>
+            </table>
+            <div class="add-food">
+                <a href="http://localhost:8000/booking/bookingdetails?bookingId={{booking_details.bookingId}}">Add More Food Item<i class="fa-solid fa-circle-plus"></i></a>
+            </div>
+                {% else %}
+                <div class="nothing">
+                    <h1 id="nofoodmsg">You have not added any food item.</h1>
+                </div>
+                <div class="add-food">
+                    <a href="http://localhost:8000/booking/bookingdetails?bookingId={{booking_details.bookingId}}">Add Food Item<i class="fa-solid fa-circle-plus"></i></a>
+                </div>
+                {% endif %}
+            
+            {% if addOnFloors %}
+            <table id="dancefloortable">
+                <tr class="table-heading">
+                    <th>Dance Floor Code</th>
+                    <th>Dance Floor Image</th>
+                    <th>Dance Floor Type</th>
+                    <th>Price Per Day of Booking</th>
+                    <th>No. of days dance floor required for??</th>
+                    <th>Total Amount<br/><h6>(Amount Per Day X Booking Days)</h6></th>
+                    <th>Remove Dance Floor(s)</th>
+                </tr>
+                {% for addOnFloor in addOnFloors %}
+                <tr class="table-content">
+                    <td>{{addOnFloor.danceFloorId.danceFloorCode}}</td>
+
+                    <td id="image-column"><img class="food-image" src="{{addOnFloor.danceFloorId.danceFloorImage.url}}" alt="Food Image"></td>
+
+                    <td>{{addOnFloor.danceFloorId.danceFloorType}}</td>
+
+                    <td id="dancefloorpricedf{{addOnFloor.danceFloorId.danceFloorId}}">{{addOnFloor.danceFloorId.danceFloorPricePerBooking}}</td>
+
+                    <td><input oninput="calculateDanceFloorTotal(id)" type="number" 
+                        id="df{{addOnFloor.danceFloorId.danceFloorId}}" min="1" max="{{booking_details.bookingDays}}"></td>
+
+                    <td><input type="number" id="danceflooramountdf{{addOnFloor.danceFloorId.danceFloorId}}" readonly></td>
+
+                    <td><a href="http://localhost:8000/payment/removedancefloor/{{addOnFloor.danceFloorId.danceFloorId}}/{{booking_details.bookingId}}/"><i class="fa-solid fa-circle-minus"></i></a></td>
+                </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td colspan="4" id="blank-column"></td>
+                    <td>Total</td>
+                    <td><input class="completetotal-floor" type="text"></td>            
+                </tr>
+            </table>
+            <div class="add-floor">
+                <a href="http://localhost:8000/booking/bookingdetails?bookingId={{booking_details.bookingId}}">Add More Dance Floor<i class="fa-solid fa-circle-plus"></i></a>
+            </div>
+            {% else %}
+            <div class="nothing">
+                <h1 id="nofloormsg">You have not selected any dance floor.</h1>
+            </div>
+            <div class="add-floor">
+                <a href="http://localhost:8000/booking/bookingdetails?bookingId={{booking_details.bookingId}}">Add Dance Floor<i class="fa-solid fa-circle-plus"></i></a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="billing-details-container">
+            <h1>C. Billing Details</h1>
+            <hr id="line"/>
+            <h2>**Note : Click on "Generate Amount Payable" button to generate total amount payable**</h2>
+            <div class="billing-details-table">
+                <table>
+                    <tr class="table-heading">
+                        <th>S. No.</th>
+                        <th>Particular(s)</th>
+                        <th>Total Amount</th>
+                    </tr>
+                    <form action="http://localhost:8000/payment/paymentprocess/{{booking_details.bookingId}}/" method="post">
+                    {% csrf_token %}
+                    <tr class="table-content">
+                        <td>1.</td>
+                        <td class="particulars">Venue Booking Charge</td>
+                        <td><input id="venuebookingcharge" type="text" name="venuebookingcharge" readonly></td>
+                    </tr>
+                    <tr class="table-content">
+                        <td>2.</td>
+                        <td class="particulars">Add-On Food Services Charge</td>
+                        <td><input id="addonfoodcharge" type="text" name="addonfoodcharge" readonly></td>
+                    </tr>
+                    <tr class="table-content">
+                        <td>3.</td>
+                        <td class="particulars">Add-On Dance Floor Services Charge</td>
+                        <td><input id="addondancefloorcharge" type="text" name="addondancefloorcharge" readonly></td>
+                    </tr>
+                    <tr class="table-content">
+                        <td colspan="2"><b>Amount Payable</b></td>
+                        <td><input id="amountpayable" type="text" name="amountpayable" readonly></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="button-container">
+                <button type="button" onclick="generateAmountPayable()" id="generatebutton" class="button">Generate Amount Payable</button>
+                <input type="submit" value="Proceed To Payment" id="paymentbutton" class="button">
+            </div>
+            </form>
+        </div>
+            
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/payment/allPayment.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

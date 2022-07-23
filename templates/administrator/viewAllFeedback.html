@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Feedback List</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllFeedback.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-feedback-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Feedbacks</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Feedbacks at MyVenueBook.Com</h1>
+        </div>
+        <div class="feedback-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Feedback ID</th>
+                    <th>Customer ID</th>
+                    <th>Feedback Type</th>
+                    <th>Feedback Description</th>
+                    <th>Feedback Response</th>
+                    <th>Feedback Status</th>
+                </tr>
+                {% for feedback in allfeedbacks %}
+                <tr class="table-value">
+                    <td class="centeralign">{{feedback.feedbackId}}</td>
+                    <td class="centeralign">{{feedback.customerId.customerId}}</td>
+                    <td class="centeralign">{{feedback.feedbackType}}</td>
+                    <td class="centeralign">{{feedback.feedbackDescription}}</td>
+                    <td class="centeralign">{{feedback.feedbackResponse}}</td>
+                    <td class="centeralign">{{feedback.feedbackStatus}}</td>
+                    {% if feedback.feedbackStatus == 'Not Replied' %}
+                    <td class="button"><a id="responsebutton" href="http://localhost:8000/administrator/feedbackresponseform/{{feedback.feedbackId}}/">Response to Feedback</a></td>
+                    {% else %}
+                    <td class="button"><button type="button" id="reponsesubmittedbutton">Response Submitted</button></td>
+                    {% endif %}                  
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

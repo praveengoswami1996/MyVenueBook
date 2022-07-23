@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Venues List</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllVenue.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-venue-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Venues</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Venues at MyVenueBook.Com</h1>
+        </div>
+        <div class="venue-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Venue Picture</th>
+                    <th>Venue ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Address</th>
+                    <th>Contact Info</th>
+                    <th>Email</th>
+                    <th>Capacity</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+                {% for venue in allvenues %}
+                <tr class="table-value">
+                    <td id="venueimagecolumn"><img src="{{venue.venueImage.url}}"></td>
+                    <td class="centeralign">{{venue.venueId}}</td>
+                    <td class="centeralign">{{venue.venueName}}</td>
+                    <td class="centeralign"><p id="venuedescription">{{venue.venueDescription}}</p></td>
+                    <td class="centeralign">{{venue.venueCity}}</td>
+                    <td class="centeralign">{{venue.venueState}}</td>
+                    <td>{{venue.venueAddress}}</td>
+                    <td class="centeralign">{{venue.venueContactCountryCode}}-{{venue.venueContactNumber}}</td>
+                    <td class="centeralign">{{venue.venueEmail}}</td>
+                    <td class="centeralign">{{venue.venueCapacity}}</td>
+                    <td class="centeralign">{{venue.venuePrice}}</td>
+                    <td class="centeralign">{{venue.venueRating}}</td>
+                    <td class="centeralign button"><a id="editbutton" href="http://localhost:8000/administrator/editvenue/{{venue.venueId}}/">Edit</a></td>
+                    <td class="centeralign button"><a id="deletebutton" onclick="return validate()" href="http://localhost:8000/administrator/deletevenue/{{venue.venueId}}/">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script>
+            function validate(){
+                if (confirm("Are you sure you want to delete this venue??")){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        </script>
+    {% endblock JS %}
+</body>
+</html>

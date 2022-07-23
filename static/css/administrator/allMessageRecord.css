@@ -1,0 +1,94 @@
+*{
+    text-transform: none;
+}
+.allmessages-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.allmessages-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.allmessages-home .navigator p{
+    font-size:1.8rem;
+}
+.allmessages-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.allmessages-home .heading-container{
+    width:100%;
+}
+.allmessages-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.allmessages-home .message-list-container{
+    width:100%;
+    margin-top:2.5rem;
+}
+.allmessages-home .message-list-container table{
+    width:100%;
+    padding:.5rem;
+}
+.allmessages-home .message-list-container table .table-heading th{
+    background: #0098a1;
+    border:.1px solid #fff;
+    padding:.5rem;
+    font-size:1.8rem;
+    color:#fff;
+    font-weight: bold;
+}
+.allmessages-home .message-list-container .table-value td{
+    background:#eee;
+    border:.1px solid #fff;
+    padding:.5rem;
+    font-size:1.6rem;
+    color:#333;
+}
+.allmessages-home .message-list-container table .table-value .centeralign{
+    text-align: center;
+}
+.allmessages-home .message-list-container table .table-value .button{
+    background: none;
+    border:none;
+    width:13%;
+}
+#responsebutton, #reponsesubmittedbutton, #mailsentbutton{
+    display: inline-block; 
+    width:100%;
+    text-align: center;
+    border:none;
+    outline:none;
+    font-size: 1.75rem;
+    padding: .5rem .6rem;
+    font-weight: bold;
+    cursor: pointer;
+    color:#fff;
+    border-radius: 1.5rem;
+}
+#responsebutton{
+    background: orangered;
+}
+#reponsesubmittedbutton{
+    background: orange;
+}
+#mailsentbutton{
+    background: green;
+}

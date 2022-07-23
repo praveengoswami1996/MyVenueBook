@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% extends 'customer/index.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} 
+    <title>MVB - Show Venue By State</title>
+    {% endblock title %}
+    
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/venue/searchVenueByState.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="venue-list-home" id="home">
+        
+        <h1 class="main-heading">List of venues available in your city</h1>
+        
+        <div class="venue-table-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="heading-row">
+                    <th>Venue ID</th>
+                    <th>Venue Name</th>
+                    <th>Venue Description</th>
+                    <th>Venue Address</th>
+                    <th>Venue Contact</th>
+                    <th>Venue Email</th>
+                    <th>Venue Capacity</th>
+                    <th>Venue Image</th>
+                    <th>Venue Price</th>
+                    <th>Venue Rating</th>
+                    <th>Book Here..</th>
+                </tr>
+                {% for venue in venues %}
+                <tr class="details-row">
+                    <td class="centercontent">{{venue.venueId}}</td>
+                    <td>{{venue.venueName}}</td>
+                    <td>{{venue.venueDescription}}</td>
+                    <td>{{venue.venueAddress}},{{venue.venueCity}},{{venue.venueState}}</td>
+                    <td class="centercontent">{{venue.venueContactCountryCode}}-{{venue.venueContactNumber}}</td>
+                    <td class="centercontent">{{venue.venueEmail}}</td>
+                    <td class="centercontent">{{venue.venueCapacity}}</td>
+                    <td class="image-container">
+                        <img class="fetched-image" src="{{ venue.venueImage.url }}" alt="Venue Image">
+                    </td>
+                    <td class="centercontent">{{venue.venuePrice}}</td>
+                    <td class="centercontent">{{venue.venueRating}}</td>
+                    <td class="centercontent"><a href="http://localhost:8000/booking/bookvenueform/{{venue.venueName}}/">Book this Venue</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="button-container">
+            <a href="http://localhost:8000/venue/allvenuelist/">View All Venues List</a>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

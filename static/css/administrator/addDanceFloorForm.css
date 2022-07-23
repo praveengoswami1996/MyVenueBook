@@ -1,0 +1,128 @@
+.add-dancefloor-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.add-dancefloor-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.add-dancefloor-home .navigator p{
+    font-size:1.8rem;
+}
+.add-dancefloor-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.add-dancefloor-home .heading-container{
+    width:100%;
+}
+.add-dancefloor-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.form-container{
+    width:100%;
+    margin-top:2rem;
+}
+.form-container form{
+    background-color:#fff;
+    border: .1rem solid #eee;
+    padding:2.5rem;
+    width:100%;
+    border-radius: .5rem;
+}
+.form-container form h3{
+    font-size: 3rem;
+    text-align: center;
+    color:#333;
+}
+.form-container form label{
+    font-size: 2.5rem;
+    margin: .2rem 0;
+    display:block;
+    color: #0098a1;
+}
+.form-container form input,
+.form-container form select,
+.form-container form textarea{
+    display: block;
+    text-transform:none;
+    font-size:1.8rem;
+    width:100%;
+    padding:.5rem;
+    border-radius: .5rem;
+    color:#333;
+    background: #eee;
+    border:none;
+    outline: none;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3) inset;
+}
+.form-container form input[type="submit"]{
+    margin-top: 2rem;
+    padding:.2rem;
+    background: navy;
+    font-size: 2rem;
+    color: #fff;
+}
+.form-container form input[type="submit"]:hover{
+    cursor: pointer;
+}
+.form-container .image-div-container{
+    display:flex;
+    justify-content: center;
+    padding:0rem 0rem 1.5rem 0rem;
+    width:100%;
+    height:20rem;
+}
+.form-container .image-div-container .dancefloor-image-container{
+    width:15%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    position:relative;
+}
+.form-container .image-div-container .dancefloor-image-container img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.form-container .image-div-container .dancefloor-image-container .camera-icon{
+    display:flex;
+    position:absolute;
+    bottom:.2rem;
+    right:2rem;
+    width:25%;
+    height:25%;
+    overflow: hidden;
+    border-radius:50%;
+    background: #0098a1;
+    justify-content: center;
+    align-items: center;
+}
+.form-container .image-div-container .dancefloor-image-container .camera-icon input[type="file"]{
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+}
+.fa-camera{
+    display: block;
+    color:#fff;
+    font-size:3rem;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Messages Page</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/allMessageRecord.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="allmessages-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">All Messages</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">All Messages Record</h1>
+        </div>
+        <div class="message-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Message ID</th>
+                    <th>Message Date</th>
+                    <th>Sender's Name</th>
+                    <th>Sender's Email</th>
+                    <th>Message Description</th>
+                    <th>Message Status</th>
+                </tr>
+                {% for message in messages %}
+                <tr class="table-value">
+                    <td class="centeralign">{{message.messageId}}</td>
+                    <td class="centeralign">{{message.messageDate}}</td>
+                    <td class="centeralign">{{message.senderName}}</td>
+                    <td class="centeralign">{{message.senderEmail}}</td>
+                    <td class="centeralign">{{message.senderMessage}}</td>
+                    <td class="centeralign">{{message.messageStatus}}</td>
+                    
+                    {% if message.messageStatus == 'Not Replied' %}
+
+                    <td class="button"><a id="responsebutton" href="mailto:{{message.senderEmail}}"><i class="fa-solid fa-envelope"></i> Send Mail</a></td>
+                    
+                    <form action="http://localhost:8000/administrator/changemsgstatus/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="messageid" value="{{message.messageId}}">
+                        <input type="hidden" name="messagestatus" value="Replied">
+                    <td class="button"><button type="submit" id="reponsesubmittedbutton" ><i class="fa-solid fa-check"></i> Mark as Replied</button></td>
+                    </form>
+                    {% else %}
+                        <td class="button"><button type="button" id="mailsentbutton"><i class="fa-solid fa-envelope-circle-check"></i> Mail Sent</button></td>
+                    {% endif %}                  
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

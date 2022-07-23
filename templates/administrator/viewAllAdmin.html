@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Administrators List</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllAdmin.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-admin-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Administrators</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Administrators at MyVenueBook.Com</h1>
+        </div>
+        <div class="admin-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Profile Picture</th>
+                    <th>Admin ID</th>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Designation</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+                {% for admin in alladmins %}
+                <tr class="table-value">
+                    <td class="adminprofileimage"><img src="{{admin.adminImage.url}}"></td>
+                    <td class="centeralign">{{admin.adminId}}</td>
+                    <td class="centeralign">{{admin.adminName}}</td>
+                    <td class="centeralign">{{admin.adminDob}}</td>
+                    <td class="centeralign">{{admin.adminGender}}</td>
+                    <td class="centeralign">{{admin.adminDesignation}}</td>
+                    <td class="centeralign">{{admin.adminEmail}}</td>
+                    <td class="centeralign">{{admin.adminMobileCountryCode}}-{{admin.adminMobileNumber}}</td>
+                    <td>{{admin.adminAddress}}</td>
+                    <td class="centeralign">{{admin.adminUsername}}</td>
+                    <td class="centeralign">{{admin.adminPassword}}</td>
+                    <td class="centeralign button"><a id="editbutton" href="http://localhost:8000/administrator/editadministrator/{{admin.adminId}}/">Edit</a></td>
+                    <td class="centeralign button"><a id="deletebutton" onclick="return validate()" href="http://localhost:8000/administrator/deleteadministrator/{{admin.adminId}}/">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script>
+            function validate(){
+                if (confirm("Are you sure you want to delete this administrator??")){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        </script>
+    {% endblock JS %}
+</body>
+</html>

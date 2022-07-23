@@ -1,0 +1,141 @@
+.signup-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:2rem 10rem;
+    background-color: #0098a1;
+}
+.signup-home .signup-form-container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.signup-home .signup-form-container form{
+    background-color:#fff;
+    border: 1px solid black;
+    margin-top:8rem;
+    padding:2.5rem;
+    width:60%;
+    border-radius: .8rem;
+    box-shadow: 0 .3rem .5rem rgba(0,0,0,.9);
+}
+.signup-home .signup-form-container form h3{
+    font-size: 3rem;
+    text-align: center;
+    color: #333;
+}
+.signup-home .signup-form-container form label{
+    font-size: 2.5rem;
+    margin: .2rem 0;
+    display: block;
+    color: #0098a1;
+}
+.signup-home .signup-form-container form input,
+.signup-home .signup-form-container .contact-field-container select{
+    display: block;
+    text-transform:none;
+    font-size:1.5rem;
+    width:100%;
+    padding:.5rem;
+    border-radius:.5rem;
+    color:#333;
+    background: #eee;
+    border:none;
+    outline: none;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3) inset;
+}
+.signup-home .signup-form-container .city-state-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.signup-home .signup-form-container .city-state-container div{
+    width:49.5%;
+}
+.signup-home .signup-form-container form input[type="submit"]{
+    margin-top: 2rem;
+    padding:.2rem;
+    background: #0de00d;
+    font-size: 2rem;
+    color: #fff;
+}
+.signup-home .signup-form-container form input[type="submit"]:hover{
+    cursor: pointer;
+}
+.signup-home .signup-form-container form input[type="reset"]{
+    margin-top: 1rem;
+    padding:.2rem;
+    background: red;
+    font-size: 2rem;
+    color: #fff;
+}
+.signup-home .signup-form-container form span{
+    font-size: 2rem;
+    position:relative;
+    bottom:1.5rem;
+}
+.signup-home .signup-form-container form input[type="radio"]{
+    box-shadow: none;
+    display: inline-block;
+    margin:0rem 3rem;
+    width:3%;
+}
+.signup-home .signup-form-container .image-div-container{
+    display:flex;
+    justify-content: center;
+    width:100%;
+}
+.signup-home .signup-form-container .image-div-container .profile-image-container{
+    width:25%;
+    height:16rem;
+    display: flex;
+    flex-direction: column;
+    position:relative;
+}
+.signup-home .signup-form-container .image-div-container .profile-image-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius: 50%;
+}
+.signup-home .signup-form-container .image-div-container .profile-image-container .camera-icon{
+    display:flex;
+    position:absolute;
+    bottom:.1rem;
+    right:1.4rem;
+    width:25%;
+    height:25%;
+    overflow: hidden;
+    border-radius:50%;
+    background: #0098a1;
+    justify-content: center;
+    align-items: center;
+}
+.signup-home .signup-form-container .image-div-container .profile-image-container .camera-icon input[type="file"]{
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+}
+.fa-camera{
+    display: block;
+    color:#fff;
+    font-size:2rem;
+}
+
+.signup-home .signup-form-container .contact-field-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.signup-home .signup-form-container .contact-field-container select{
+    width:14%;
+    text-align: center;
+}
+.signup-home .signup-form-container .contact-field-container input{
+    width:84%;
+}
+.errormsg{
+    display: block;
+}

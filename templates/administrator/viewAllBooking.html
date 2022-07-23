@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Booking Record</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllBooking.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-booking-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Booking Record</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Booking Record at MyVenueBook.Com</h1>
+        </div>
+        <div class="booking-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Booking Id</th>
+                    <th>Customer Id</th>
+                    <th>venue Id</th>
+                    <th>Event Type</th>
+                    <th>Booking Date & Time</th>
+                    <th>Booking Start Date</th>
+                    <th>Booking End Date</th>
+                    <th>Booking Days</th>
+                    <th>Booking Status</th>    
+                </tr>
+                {% for booking in allbookings %}
+                <tr class="table-value">
+                    <td class="centeralign">{{booking.bookingId}}</td>
+                    <td class="centeralign">{{booking.customerId.customerId}}</td>
+                    <td class="centeralign">{{booking.venueId.venueId}}</td>
+                    <td class="centeralign">{{booking.eventType}}</td>
+                    <td class="centeralign">{{booking.bookingDateTime}}</td>
+                    <td class="centeralign">{{booking.bookingStartDate}}</td>
+                    <td class="centeralign">{{booking.bookingEndDate}}</td>
+                    <td class="centeralign">{{booking.bookingDays}}</td>
+                    <td class="centeralign">{{booking.bookingStatus}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Food List</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllFood.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-food-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Foods</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Foods at MyVenueBook.Com</h1>
+        </div>
+        <div class="food-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Food Image</th>
+                    <th>Food Id</th>
+                    <th>Food Name</th>
+                    <th>Food Cuisine</th>
+                    <th>Food Price Per Serving</th>
+                    <th>Food Code</th>
+                </tr>
+                {% for food in allfoods %}
+                <tr class="table-value">
+                    <td class="foodimage"><img src="{{food.foodImage.url}}" alt="Food Image"></td>
+                    <td class="centeralign">{{food.foodId}}</td>
+                    <td class="centeralign">{{food.foodName}}</td>
+                    <td class="centeralign">{{food.foodCuisine}}</td>
+                    <td class="centeralign">{{food.foodPricePerServing}}</td>
+                    <td class="centeralign">{{food.foodCode}}</td>
+                    <td class="centeralign button"><a id="editbutton" href="http://localhost:8000/administrator/editfood/{{food.foodId}}/">Edit</a></td>
+                    <td class="centeralign button"><a id="deletebutton" href="http://localhost:8000/administrator/deletefood/{{food.foodId}}/">Delete</a></td>                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

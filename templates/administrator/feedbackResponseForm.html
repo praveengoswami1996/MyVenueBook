@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Feedback Response Form</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/feedbackResponseForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="feedback-response-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="http://localhost:8000/administrator/viewallfeedback/">View All Feedbacks</a> / <a href="#">Response to Feedback</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">ADMINISTRATOR FEEDBACK RESPONSE PROCESS</h1>
+        </div>
+
+        <div class="feedbackformheading">
+            <h1>Feedback Response Form</h1>
+        </div>
+
+        <div class="feedbackformcontainer">
+            <form action="http://localhost:8000/administrator/submitfeedbackresponse/" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+
+            <label for="feedbackid">Feedback ID</label>
+            <input type="text" id="feedbackid" name="feedbackid" value="{{feedback.feedbackId}}" readonly>
+
+            <label for="customerid">Customer ID</label>
+            <input type="text" id="customerid" name="customerid" value="{{feedback.customerId.customerId}}" readonly>
+
+            <label for="feedbacktype">Feedback Type</label>
+            <input type="text" id="feedbacktype" name="feedbacktype" value="{{feedback.feedbackType}}" readonly>
+
+            <label for="feedbackdescription">Feedback Description</label>
+            <textarea id="feedbackdescription" name="feedbackdescription" rows="4" readonly>{{feedback.feedbackDescription}}</textarea>
+
+            <label for="feedbackresponse">Feedback Response</label>
+            <textarea id="feedbackresponse" name="feedbackresponse" placeholder="Write your response.." rows="4" required></textarea>
+            <label id="errormsg"></label>
+
+            <input type="hidden" name="feedbackstatus" value="Replied">
+        
+            <input type="submit" value="Submit Response">
+
+            </form>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+    <!--Customer JS File links-->
+    {% block JS %}
+        {{block.super}}
+        <script>
+            function validateForm(){
+                let returnValue = true;
+                let feedbackResponseField = document.getElementById('feedbackresponse');
+                let feedbackResponse = feedbackResponseField.value.trim();
+                let errorLabel = document.getElementById('errormsg');
+                if (feedbackResponse == '' || feedbackResponse == null){
+                    feedbackResponseField.style.border = ".1rem solid red";
+                    errorLabel.innerHTML = "***You must enter some response."
+                    errorLabel.style.color = "red";
+                    errorLabel.style.textTransform = "none";
+                    errorLabel.style.fontSize = "1.5rem";
+                    returnValue = false;
+                }
+                else{
+                    alert("Feedback response submitted successfully.")
+                }
+                return returnValue;
+            }
+        </script>
+    {% endblock JS %}
+</body>
+</html>

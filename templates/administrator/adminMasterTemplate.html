@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Admin Master Template</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+    <link rel="stylesheet" href="{% static 'css/administrator/adminMasterTemplate.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--header section starts-->
+    {% block header %}
+    <header>
+        <a href="http://localhost:8000/administrator/dashboard/" class="logo">myVenueBook<span>.</span></a>
+        <div class="dropdown">
+            <div><a href="#" onclick="myFunction()" class="fa fa-user-circle"></a></div>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="http://localhost:8000/administrator/dashboard/">Dashboard</a>
+                <a href="http://localhost:8000/administrator/manageaccount/">Manage Account</a>
+                <a href="http://localhost:8000/administrator/allmessages/">All Messages</a>
+                <a href="http://localhost:8000/administrator/dologout/">Sign out</a>
+            </div>
+        </div>
+    </header>
+    {% endblock header %}
+    <!--header section ends-->
+
+    <!--home section starts-->
+    {% block home %}
+    <section class="home" id="home">
+
+        <div class="hero-image">
+            
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+        
+    <!--Footer Section starts-->
+    {% block footer %}   
+    <section class="footer">
+    
+    <h1 class="credit">Created by <span>Praveen Goswami</span> | All rights reserved.</h1>
+    
+    <div class="icons">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-github"></a>
+    </div>
+    
+    </section>
+    {% endblock footer %}
+    <!--Footer Section ends-->
+    
+    <!--Jquery cdn link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+    <script src="{% static 'javascript/customer/customerMasterTemplate.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

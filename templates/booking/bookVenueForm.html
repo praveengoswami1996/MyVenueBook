@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Venue Booking Form</title>
+    {% endblock title %}
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/booking/bookVenueForm.css'%}">        
+    {% endblock CSS%}
+</head>
+<body>
+    {% block home %}
+    <section class="book-venue-home" id="home">
+
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / Venue Booking Process</p>
+        </div>
+
+        <div class="image-form-container">
+            <div class="venue-image">
+                <img src="{{selected_venue.venueImage.url}}" alt="Selected Venue Image">    
+            </div>
+
+            <div class="booking-form-container">
+                <h3><u>Details of Selected Venue</u></h3>
+                <hr />
+                <table>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue ID</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueId}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Name</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Description</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueDescription}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Address</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueAddress}},{{selected_venue.venueCity}}, {{selected_venue.venueState}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Contact</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueContactCountryCode}}-{{selected_venue.venueContactNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Email</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueEmail}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Capacity</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueCapacity}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Price per day</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venuePrice}}</td>
+                    </tr>
+                    <tr>
+                        <td class="venue-details-heading venue-field">Venue Ratings</td>
+                        <td class="venue-field">:</td>
+                        <td class="field-value">{{selected_venue.venueRating}} (Out of 5.0)</td>
+                    </tr>
+                </table>
+                <hr />
+                <div id="mydiv">
+                    <a href="http://localhost:8000/venue/changevenue/{{selected_venue.venueName}}/" id="changevenuebtn">Change Venue</a>
+                </div>
+            </div>
+        </div>
+        <div class="dynamic-bookingform-container">
+            <h2>Venue Booking Form</h2>
+            
+            <form action="http://localhost:8000/booking/bookvenue/1/" method="post" id="myform">
+                {% csrf_token %}
+
+                <label for="eventtype">Event Type</label>
+                <select class="eventtype" id="eventtype" name="eventtype" required>
+                    <option value="">---Select event type---</option>
+                    <optgroup label="Social Events">
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Wedding Reception">Wedding Reception</option>
+                        <option value="Wedding Anniversary">Wedding Anniversary</option>
+                        <option value="Ring Ceremony">Ring Ceremony</option>
+                    </optgroup>
+                    <optgroup label="Entertainment Events">
+                        <option value="Music Concert">Music Concert</option>
+                        <option value="Award Ceremony">Award Ceremony</option>
+                        <option value="Fashion Shows">Fashion Shows</option>
+                        <option value="Celebrity Performance">Celebrity Performance</option>
+                    </optgroup>
+                    <optgroup label="Corporate Events">
+                        <option value="Product Launch">Product Launch</option>
+                        <option value="Annual Function">Annual Function</option>
+                        <option value="Corporate Meeting">Corporate Meeting</option>
+                    </optgroup>
+                </select>
+                <label class="errormsg"></label>
+
+                <label for="customerid">Customer ID</label>
+                <input type="text" id="customerid" name="customerid" value="{{loggedInCustomer.customerId}}" readonly>
+                
+                <label for="venueid">Venue ID</label>
+                <input type="text" id="venueid" name="venueid" value="{{selected_venue.venueId}}" readonly>
+                
+                <label for="bookingstartdate">Booking Start Date</label>
+                <input type="date" id="bookingstartdate" name="bookingstartdate" onchange="calculateBookingDays()" required>
+                
+                <label for="bookingenddate">Booking End Date</label>
+                <input type="date" id="bookingenddate" name="bookingenddate" onchange="calculateBookingDays()" required>
+
+                <label for="totalbookingdays">Total Booking Days</label>
+                <input type="text" id="totalbookingdays" name="totalbookingdays" readonly><br />
+                
+                <input id="confirmbtn" type="submit" value="Confirm Booking">
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/booking/bookVenueForm.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

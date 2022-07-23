@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Add Dance Floor Process</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/addDanceFloorForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="add-dancefloor-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">Add Dance Floor</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Add Dance Floor Process</h1>
+        </div>
+
+        <div class="form-container">
+            <form action="http://localhost:8000/administrator/adddancefloor/" method="post" name="myform" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="image-div-container">
+                    <div class="dancefloor-image-container">
+                        <img src="{% static 'image/danceFloorIcon.jpg'%}" alt="Dance Floor Image" id="dancefloorimage">
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="dancefloorimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+            
+                <label for="dancefloortype">Dance Floor Type </label>
+                <input type="text" id="dancefloortype" name="dancefloortype" placeholder="Enter dance floor type" value="{{newDanceFloor.danceFloorType}}" required>
+                <span class="errormsg"></span>
+                
+                <label for="dancefloordescription">Dance Floor Description</label>
+                <textarea id="dancefloordescription" name="dancefloordescription" placeholder="Enter dance floor description" rows="5" required>{{newDanceFloor.danceFloorDescription}}</textarea>
+                <span class="errormsg"></span>
+
+                <label for="dancefloorpriceperbooking">Dance Floor Price Per Day</label>
+                <input type="text" id="dancefloorpriceperbooking" name="dancefloorpriceperbooking" placeholder="Enter dance floor price per day" value="{{newDanceFloor.danceFloorPricePerBooking}}" required>
+                <span class="errormsg"></span>
+
+                {% if dancefloor_Code_Error %}
+                <label for="dancefloorcode">Dance Floor Code</label>
+                <input style="border:.1rem solid red;" type="text" id="dancefloorcode" name="dancefloorcode" placeholder="Create a dance floor code" value="{{newDanceFloor.danceFloorCode}}" required>
+                <span style="color:red; font-size:1.5rem;">***Dance floor code already exists.</span>
+                {% else %}
+                <label for="dancefloorcode">Dance Floor Code</label>
+                <input type="text" id="dancefloorcode" name="dancefloorcode" placeholder="Create a dance floor code" required>
+                <span class="errormsg"></span>
+                {% endif %}
+
+                <input type="submit" value="Add Dance Floor">
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/addDanceFloorForm.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

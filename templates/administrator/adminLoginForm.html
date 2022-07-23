@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVBAdmin - Admin Login Form</title>
+     <!--Font Awesome cdn file link-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+     <!--Customer CSS File Link-->
+    <link rel="stylesheet" href="{% static 'css/administrator/adminLoginForm.css' %}">
+</head>
+<body>
+    <section class="admin-login-home" id="adminloginhome">
+
+        <div class="hero-image">
+            <img src="{% static 'image/hero-image.jpg' %}" alt="Hero Image">
+        </div>
+        <div class="go-back-button">
+            <a href="http://localhost:8000/">Go back to MyVenueBook.Com</a>
+        </div>
+        <div class="login-form-container">
+            <h1><i class="fa-solid fa-user-gear"></i>Administrator Login</h1>
+            <form action="http://localhost:8000/administrator/dologin/" method="post">
+                {% csrf_token %}
+                <label for="adminusername">Username</label>
+                <input type="text" name="adminusername" id="adminusername" placeholder="Enter valid admin username">
+                <label for="adminpassword">Password</label>
+                <input type="password" name="adminpassword" id="adminpassword" placeholder="Enter your password">
+                <a href="#">Forgot Password??</a>
+                <input type="submit" value="Login">
+                <input type="reset" value="Reset">
+            </form>
+        </div>
+
+    </section>
+</body>
+</html>

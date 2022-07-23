@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Customer Feedback Record</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/customer/customerFeedbackRecord.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="feedback-record-home" id="home">
+
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / <a href="#">My Feedbacks</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">My Feedbacks</h1>
+        </div>
+        {% if feedbacks %}
+        <div class="feedback-record-container">
+            <table>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Feedback Type</th>
+                    <th>Your Feedback</th>
+                    <th>Feedback Response</th>
+                </tr>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{feedback.feedbackId}}</td>
+                    <td>{{feedback.feedbackType}}</td>
+                    <td id="leftalign">{{feedback.feedbackDescription}}</td>
+                    {% if feedback.feedbackResponse %}
+                        <td id="leftalign">{{feedback.feedbackResponse}}</td>
+                    {% else %}
+                        <td id="fadefont">Response yet to be received.</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="nofeedback">
+            <h1>You have no feedback record.</h1>
+        </div>
+        {% endif %}
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

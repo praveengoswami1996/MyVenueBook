@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Customer Booking Records</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/customer/customerBookingRecords.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="booking-records-home" id="home">
+
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / <a href="#">My Bookings</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">My Bookings</h1>
+        </div>
+        {% if bookingRecords %}
+        <div class="booking-records-container">
+            {% for bookingRecord in bookingRecords %}
+            <div class="booking-record-strip">
+                <div class="venue-image">
+                    <img src="{{bookingRecord.bookingId.venueId.venueImage.url}}">
+                </div>
+                <div class="booking-details-container">
+                    <div class="booking-details">
+                        <p><span>Booking Id : </span>{{bookingRecord.bookingId.bookingId}}</p>
+                        <p><span>Booking Date & Time : </span>{{bookingRecord.bookingId.bookingDateTime}}</p>
+                        <p><span>Venue Name : </span>{{bookingRecord.bookingId.venueId.venueName}}</p>
+                        <p><span>Booked For : </span>{{bookingRecord.bookingId.bookingStartDate}} - {{bookingRecord.bookingId.bookingEndDate}}</p>
+                        {% if bookingRecord.paymentId %}
+                        <p><span>Total Booking Amount : </span>{{bookingRecord.paymentId.paymentAmount}}</p>
+                        {% else %}
+                        <p><span>Total Booking Amount : </span>Amount not generated yet!! Please Complete Booking Procedure</p>
+                        {% endif %}
+                    </div>
+                    <div class="status-container">
+                        {% if bookingRecord.paymentStatus == 'Not Paid' %}
+                        <div>Payment Status : <span style="background-color: red;">{{bookingRecord.paymentStatus}}</span></div>
+                        {% elif bookingRecord.paymentStatus == 'Paid' %}
+                        <div>Payment Status : <span style="background-color: green;">{{bookingRecord.paymentStatus}}</span></div>
+                        {% endif %}
+                        <div>Booking Status : <span>{{bookingRecord.bookingStatus}}</span></div>
+                        {% if bookingRecord.paymentId %}
+                        <div class="right-align"><a href="#">View Details</a></div>
+                        {% else %}
+                        <div class="right-align"><a href="#">View Details</a></div>
+                        <div class="right-align"><a href="http://localhost:8000/payment/billingprocess/{{bookingRecord.bookingId.bookingId}}/" id="completeBookingButton">Complete Booking</a></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="nobooking">
+            <h1>You have no bookings.</h1>
+        </div>
+        {% endif %}
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

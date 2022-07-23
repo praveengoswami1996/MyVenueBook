@@ -1,0 +1,99 @@
+.invoice-record-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.invoice-record-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.invoice-record-home .navigator p{
+    font-size:1.8rem;
+}
+.invoice-record-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.invoice-record-home .heading-container{
+    width:100%;
+}
+.invoice-record-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.invoice-record-home .invoice-record-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width:100%;
+    padding:.8rem;
+    border:.1rem solid #eee;
+    border-radius: .8rem;
+}
+.invoice-record-home .invoice-record-container table{
+    background: #fff;
+}
+.invoice-record-home .invoice-record-container table th{
+    text-align: center;
+    font-size: 1.9rem;
+    padding:1rem .8rem;
+    background-color:#0098a1;
+    color:#fff;
+    font-weight: bold;
+}
+.invoice-record-home .invoice-record-container table td{
+    text-align: center;
+    font-size: 1.6rem;
+    padding:.3rem .8rem;
+    background-color: #eee;
+    color:#333;
+}
+#button1,
+#button2{
+    background: none;
+    width:10%;
+}
+#viewbutton, #downloadbutton{
+    display: inline-block;
+    width:100%;
+    font-size:1.6rem;
+    border-radius: 1.5rem;
+    color:#fff;
+    padding:.6rem .8rem;
+}
+#viewbutton{
+    background-color: royalblue;
+}
+#downloadbutton{
+    background-color: red;
+}
+.noinvoice{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:.1rem solid #eee;
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+.noinvoice h1{
+    font-size: 2.5rem;
+    color: grey;
+    padding:3rem 1rem;
+    text-transform: none;
+}

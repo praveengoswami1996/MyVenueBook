@@ -1,0 +1,94 @@
+.venuebystate-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.venuebystate-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.venuebystate-home .navigator p{
+    font-size:1.8rem;
+    color:#0098a1;
+    text-transform: none;
+}
+.venuebystate-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.venuebystate-home .heading-container{
+    width:100%;
+}
+.venuebystate-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.venuebystate-home .venue-table-container{
+    margin-top:2rem;
+}
+.venuebystate-home .venue-table-container table{
+    background:#f7f7f7;
+}
+.venuebystate-home .venue-table-container table .heading-row th{
+    font-size: 1.9rem;
+    background-color: #0098a1;
+    color:#fff;
+    padding:.1rem;
+    border:.2rem solid #fff;
+}
+.venuebystate-home .venue-table-container table .details-row td{
+    padding:0rem .5rem;
+    border:.3rem solid #fff;
+    font-size: 1.5rem;
+    text-transform: none;
+}
+.venuebystate-home .venue-table-container table .details-row .centercontent{
+    text-align: center;
+}
+.venuebystate-home .venue-table-container table .details-row .image-container{
+    padding:0;
+    width:25rem;
+    height:18rem;
+    box-sizing: border-box;
+}
+.venuebystate-home .venue-table-container table .details-row .fetched-image{
+    height:100%;
+    width:100%;
+    object-fit: contain;
+}
+.venuebystate-home .button-container{
+    margin-top:3rem;
+    width:100%;
+    padding:0;
+    display: flex;
+    justify-content: center;
+}
+.venuebystate-home .button-container a{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    color:#fff;
+    background:#0098a1;
+    padding:.8rem 1rem .4rem;
+    height:4rem;
+    font-weight: bold;
+    cursor:pointer;
+}
+.venuebystate-home .button-container a:hover{
+    background: #11998e;
+}

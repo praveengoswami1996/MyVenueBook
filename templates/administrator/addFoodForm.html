@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Add Food Process</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/addFoodForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="add-food-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">Add Food</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Add Food Process</h1>
+        </div>
+
+        <div class="form-container">
+            <form action="http://localhost:8000/administrator/addfood/" method="post" name="myform" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="image-div-container">
+                    <div class="food-image-container">
+                        <img src="{% static 'image/addFood.png'%}" alt="Food Image" id="foodimage">
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="foodimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+                {% if food_Name_Error %}
+                <label for="foodname">Food Name </label>
+                <input style="border:.1rem solid red;" type="text" id="foodname" name="foodname" placeholder="Enter Food Name" value="{{newFood.foodName}}" required>
+                <span style="color:red; font-size:1.5rem ; text-transform: none;">{{food_Name_Error}}</span>
+
+                {% else %}
+                <label for="foodname">Food Name </label>
+                <input type="text" id="foodname" name="foodname" placeholder="Enter Food Name" value="{{newFood.foodName}}" required>
+                <span class="errormsg"></span>
+                {% endif %}
+                
+                <label for="foodcuisine">Food Cuisine </label>
+                <select id="foodcuisine" name="foodcuisine" required>
+                    {% if newFood.foodCuisine == "Chinese" %}
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif newFood.foodCuisine == "Drink" %}
+                    <option value="Drink">Drink</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif newFood.foodCuisine == "Punjabi" %}
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    {% else %}
+                    <option value="">---Select food cuisine---</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% endif %}
+                </select>
+            
+                <label for="foodpriceperserving">Food Price Per Serving </label>
+                <input type="text" id="foodpriceperserving" name="foodpriceperserving" placeholder="Enter food price per serving" value="{{newFood.foodPricePerServing}}" required >
+                <span class="errormsg"></span>
+                
+                {% if food_Code_Error %}
+                <label for="foodcode">Food Code </label>
+                <input style="border:.1rem solid red;" type="text" id="foodcode" name="foodcode" placeholder="Create Food Code" value="{{newFood.foodCode}}" required>
+                <span style="color:red; font-size:1.5rem ; text-transform: none;">{{food_Code_Error}}</span>
+                {% else %}
+                <label for="foodcode">Food Code </label>
+                <input type="text" id="foodcode" name="foodcode" placeholder="Create Food Code" value="{{newFood.foodCode}}" required>
+                <span class="errormsg"></span>
+                {% endif %}
+
+                <input type="submit" value="Add Food">
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/addFoodForm.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

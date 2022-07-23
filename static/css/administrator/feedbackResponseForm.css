@@ -1,0 +1,92 @@
+*{
+    text-transform: none;
+}
+.feedback-response-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.feedback-response-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.feedback-response-home .navigator p{
+    font-size:1.8rem;
+}
+.feedback-response-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.feedback-response-home .heading-container{
+    width:100%;
+}
+.feedback-response-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.feedback-response-home .feedbackformheading{
+    width:40%;
+    background: lightgreen;
+    padding:.8rem;
+    border-radius: 1.5rem;
+    margin-top: 1.5rem;
+}
+.feedback-response-home .feedbackformheading h1{
+    width:100%;
+    text-align: center;
+    font-size: 4rem;
+    text-transform: none;
+}
+.feedback-response-home .feedbackformcontainer{
+    width:100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.feedback-response-home .feedbackformcontainer form{
+    width:40%;
+    padding:1rem 1.5rem;
+    background-color:lightcyan;
+    border-radius:1rem;
+}
+.feedback-response-home .feedbackformcontainer form label{
+    display: block;
+    font-size:2rem;
+    padding:.2rem .2rem;
+    font-weight: bold;
+}
+.feedback-response-home .feedbackformcontainer form input,
+.feedback-response-home .feedbackformcontainer form textarea{
+    display: block;
+    width:100%;
+    border:none;
+    outline:none;
+    text-transform: none;
+    border-radius: 1rem;
+    padding:1.1rem 1rem;
+    font-size:1.8rem;
+    margin:.5rem 0rem;
+    box-shadow: 0rem .2rem .1rem rgba(0,0,0,.3) inset;
+}
+.feedback-response-home .feedbackformcontainer form input[type="submit"]{
+    margin-top: 1.5rem;
+    box-shadow: none;
+    background:lightgreen;
+    cursor: pointer;
+    font-weight: bold;
+}

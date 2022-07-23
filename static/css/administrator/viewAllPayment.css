@@ -1,0 +1,67 @@
+*{
+    text-transform: none;
+}
+.view-all-payment-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.view-all-payment-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.view-all-payment-home .navigator p{
+    font-size:1.8rem;
+}
+.view-all-payment-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.view-all-payment-home .heading-container{
+    width:100%;
+}
+.view-all-payment-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.view-all-payment-home .payment-list-container{
+    width:100%;
+    margin-top:2.5rem;
+}
+.view-all-payment-home .payment-list-container table{
+    width:100%;
+    padding:.5rem;
+}
+.view-all-payment-home .payment-list-container table .table-heading th{
+    background: #0098a1;
+    border:.1px solid #fff;
+    padding:.5rem;
+    font-size:1.8rem;
+    color:#fff;
+    font-weight: bold;
+}
+.view-all-payment-home .payment-list-container table .table-value td{
+    background:#eee;
+    border:.1px solid #fff;
+    padding:.5rem;
+    font-size:1.6rem;
+    color:#333;
+}
+.view-all-payment-home .payment-list-container table .table-value .centeralign{
+    text-align: center;
+}

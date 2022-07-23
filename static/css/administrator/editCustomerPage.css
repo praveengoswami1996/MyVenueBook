@@ -1,0 +1,169 @@
+.edit-customer-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.edit-customer-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.edit-customer-home .navigator p{
+    font-size:1.8rem;
+}
+.edit-customer-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.edit-customer-home .heading-container{
+    width:100%;
+}
+.edit-customer-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.signup-form-container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    margin-top:2rem;
+}
+.signup-form-container form{
+    background-color:#fff;
+    border: .1rem solid #eee;
+    padding:2.5rem;
+    width:100%;
+    border-radius: .5rem;
+}
+.signup-form-container form h3{
+    font-size: 3rem;
+    text-align: center;
+    color:#333;
+}
+.signup-form-container .image-div-container{
+    display:flex;
+    justify-content: center;
+    padding:0rem 0rem 1.5rem 0rem;
+    width:100%;
+    height:18rem;
+}
+.signup-form-container .image-div-container .profile-image-container{
+    width:14%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    position:relative;
+}
+.signup-form-container .image-div-container .profile-image-container img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.signup-form-container .image-div-container .profile-image-container .camera-icon{
+    display:flex;
+    position:absolute;
+    bottom:.2rem;
+    right:2rem;
+    width:25%;
+    height:25%;
+    overflow: hidden;
+    border-radius:50%;
+    background: #0098a1;
+    justify-content: center;
+    align-items: center;
+}
+.signup-form-container .image-div-container .profile-image-container .camera-icon input[type="file"]{
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+}
+.fa-camera{
+    display: block;
+    color:#fff;
+    font-size:3rem;
+}
+.signup-form-container form label{
+    font-size: 2.5rem;
+    margin: .2rem 0;
+    display:block;
+    color: #0098a1;
+}
+.signup-form-container form input,
+.signup-form-container form select{
+    display: block;
+    text-transform:none;
+    font-size:1.8rem;
+    width:100%;
+    padding:.5rem;
+    border-radius: .5rem;
+    color:#333;
+    background: #eee;
+    border:none;
+    outline: none;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3) inset;
+}
+.signup-form-container form input[type="submit"]{
+    margin-top: 2rem;
+    padding:.2rem;
+    background: navy;
+    font-size: 2rem;
+    color: #fff;
+}
+.signup-form-container form input[type="submit"]:hover{
+    cursor: pointer;
+}
+.signup-form-container form span{
+    font-size: 2rem;
+    margin: 0 1rem 2rem 1rem;
+    position:relative;
+    top:.1rem;
+}
+.signup-form-container form input[type="radio"]{
+    box-shadow: none;
+    display: inline-block;
+    width:5%;
+}
+.dob-field-container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:100%;
+    justify-content: space-between;
+}
+.dob-field-container #previousdob{
+    display:block;
+    width:23%;
+    text-align: center;
+}
+.dob-field-container #customerdob{
+    display:block;
+    width:76%;
+    text-align: center;
+}
+.signup-form-container .contact-field-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.signup-form-container .contact-field-container select{
+    width:15%;
+    text-align: center;
+}
+.signup-form-container .contact-field-container input{
+    width:84%;
+}

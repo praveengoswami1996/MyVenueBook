@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - All Invoice Record</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/viewAllInvoice.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="view-all-invoice-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">View All Invoice Record</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">List of All Invoice Record at MyVenueBook.Com</h1>
+        </div>
+        <div class="invoice-list-container">
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Invoice Id</th>
+                    <th>Invoice Date</th>
+                    <th>Booking Id</th>
+                    <th>Customer Id</th>
+                    <th>Invoice Name</th>
+                    <th>Invoice Address</th>
+                    <th>Invoice City</th>
+                    <th>Invoice State</th>
+                    <th>Invoice Pincode</th>
+                    <th>Particulars</th>
+                    <th>Particulars Amount</th>
+                    <th>Total Amount Payable</th>
+                </tr>
+                {% for invoice in allinvoices %}
+                <tr class="table-value">
+                    <td class="centeralign">{{invoice.invoiceId}}</td>
+                    <td class="centeralign">{{invoice.invoiceDate}}</td>
+                    <td class="centeralign">{{invoice.bookingId.bookingId}}</td>
+                    <td class="centeralign">{{invoice.customerId.customerId}}</td>
+                    <td class="centeralign">{{invoice.invoiceName}}</td>
+                    <td class="centeralign">{{invoice.invoiceAddress}}</td>
+                    <td class="centeralign">{{invoice.invoiceCity}}</td>
+                    <td class="centeralign">{{invoice.invoiceState}}</td>
+                    <td class="centeralign">{{invoice.invoicePincode}}</td>
+                    <td>
+                        1. {{invoice.venueParticular}}<br />
+                        2. {{invoice.foodParticular}}<br />
+                        3. {{invoice.danceFloorParticular}}</td>
+                    <td>
+                        1. {{invoice.venueParticularAmount}}<br /><br />
+                        2. {{invoice.foodParticularAmount}}<br /><br />
+                        3. {{invoice.danceFloorParticularAmount}}</td>
+                    <td class="centeralign">{{invoice.invoiceTotalAmount}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+</body>
+</html>

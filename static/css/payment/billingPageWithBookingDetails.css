@@ -1,0 +1,221 @@
+.billing-process-home{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding:10rem 2.8rem;
+    background: #fff;
+}
+.billing-process-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.billing-process-home .navigator p{
+    font-size:1.8rem;
+    color:lightseagreen;
+}
+.billing-process-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.billing-process-home .booking-details-container{
+    width:100%;
+}
+.billing-process-home .booking-details-container h1{
+    font-size:3.5rem;
+    color:#0098a1;
+}
+#line{
+    background:#0098a1;
+    margin:0rem 0rem 2rem 0rem;
+    height:.7rem;
+    border-radius:1rem;
+}
+.billing-process-home .booking-details-container table{
+    width:100%;
+    border:1px solid #fff;
+}
+.billing-process-home .booking-details-container table .table-heading th{
+    font-size:2rem;
+    border:1px solid #fff;
+    padding:.3rem;
+    background: #0098a1;
+    color:#fff;
+}
+.billing-process-home .booking-details-container table .table-content td{
+    font-size:1.7rem;
+    text-align: center;
+    border:1px solid #fff;
+    padding:.3rem;
+    padding:1.5rem 0rem;
+    background: #eee;
+}
+
+.billing-process-home .addon-details-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: 1.5rem;
+}
+.billing-process-home .addon-details-container h1{
+    font-size:3.5rem;
+    color:#0098a1;
+}
+.billing-process-home .addon-details-container table{
+    width:100%;
+    border:1px solid #fff;
+}
+.billing-process-home .addon-details-container #dancefloortable{
+    margin-top:2rem;
+}
+.billing-process-home .addon-details-container table .table-heading th{
+    font-size:2rem;
+    border:1px solid #fff;
+    background: #0098a1;
+    color:#fff;
+}
+.billing-process-home .addon-details-container table .table-content td{
+    font-size:1.7rem;
+    text-align: center;
+    border:1px solid #fff;
+    padding:1.5rem 0rem;
+    background: #eee;
+}
+.billing-process-home .addon-details-container table .table-content #image-column{
+    width:20%;
+    padding:0;
+}
+.billing-process-home .addon-details-container table .table-content td .food-image{
+    object-fit: cover;
+    width:100%;
+    height:10rem;
+}
+.billing-process-home .addon-details-container table .table-content .fa-circle-minus{
+    font-size: 3rem;
+    color:red;
+}
+.billing-process-home .addon-details-container table .total-row td{
+    font-size:1.7rem;
+    text-align: center;
+    border:1px solid #fff;
+    padding:1.5rem 0rem;
+    background: #eee;
+}
+.billing-process-home .addon-details-container table .total-row #blank-column{
+    background: #fff;
+}
+.billing-process-home .addon-details-container .add-food,
+.billing-process-home .addon-details-container .add-floor{
+    display:flex;
+    flex-direction: row-reverse;
+    width:100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding:.5rem;
+}
+.billing-process-home .addon-details-container .add-food a,
+.billing-process-home .addon-details-container .add-floor a{
+    font-size: 2rem;
+    background-color: #0098a1;
+    width:17%;
+    text-align: center;
+    color:#fff;
+    border-radius: 1rem;
+    padding-bottom: .6rem;
+}
+.billing-process-home .addon-details-container .add-food .fa-circle-plus,
+.billing-process-home .addon-details-container .add-floor .fa-circle-plus{
+    font-size: 2rem;
+    margin-left:.6rem;
+    margin-top:.6rem;
+}
+.billing-process-home .billing-details-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: 1.5rem;
+}
+.billing-process-home .billing-details-container h1{
+    font-size:3.5rem;
+    color:#0098a1;
+}
+.billing-process-home .billing-details-container h2{
+    color:red;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.billing-process-home .billing-details-container .billing-details-table{
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+.billing-process-home .billing-details-container .billing-details-table table{
+    width:50%;
+    border:1px solid #fff;
+}
+.billing-process-home .billing-details-container .billing-details-table table .table-heading th{
+    font-size:2rem;
+    border:1px solid #fff;
+    background: #0098a1;
+    color:#fff;
+}
+.billing-process-home .billing-details-container .billing-details-table table .table-content td{
+    font-size:1.7rem;
+    text-align: center;
+    border:1px solid #fff;
+    padding:1.5rem 0rem;
+    background: #eee;
+}
+.billing-process-home .billing-details-container .billing-details-table table .table-content .particulars{
+    padding:0 .5rem;
+    text-align: left;
+}
+.billing-process-home .billing-details-container .button-container{
+    width:50%;
+    display:flex;
+    justify-content:space-between;
+    padding:2rem 0rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.billing-process-home .billing-details-container .button-container .button{
+    width:45%;
+    cursor: pointer;
+    display:block;
+    text-align: center;
+    font-size:2rem;
+    color:#fff;
+    margin-top:2rem;
+    border:none;
+    outline: none;
+    height:3.5rem;
+    border-radius:1.5rem;
+    transition: .2s linear;
+    box-shadow: 0 .3rem .5rem rgba(0,0,0,.9);
+}
+.billing-process-home .billing-details-container .button-container #generatebutton{
+    background:orange;
+}
+.billing-process-home .billing-details-container .button-container #paymentbutton{
+    background:  #0de00d;
+}
+.nothing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:.1rem solid #eee;
+    border-radius: 1.5rem;
+    padding:3rem;
+}
+.nothing #nofoodmsg,
+.nothing #nofloormsg{
+    text-transform: none;
+    font-size: 3rem;
+}

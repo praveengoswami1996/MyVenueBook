@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'customer/index.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Customer Login Form</title>
+    {% endblock title %}
+
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/customer/customerLoginForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    {% block home %}
+    <section class="home login-home" id="home">
+
+        <div class="login-form-container">
+            <form action="http://localhost:8000/customer/dologinvalidate/" method="post">
+                {% csrf_token %}
+                <h3>Customer Login Form</h3>
+                <label for="username">Username </label>
+                <input type="text" id="customerusername" name="customerusername" placeholder="Enter your username">
+                <label for="password">Password </label>
+                <input type="text" id="customerpassword" name="customerpassword" placeholder="Enter your password">
+                
+                <a class="forgot-link" href="#">Forgot Password??</a>
+    
+                <input type="submit" value="Login">
+                <h4>Don't have an account..SignUp Here</h4>
+                <a class="signup-link" href="http://localhost:8000/customer/signupform/">SignUp</a>
+            </form>    
+        </div>
+    </section>
+    
+    {% endblock home %}    
+</body>
+</html>

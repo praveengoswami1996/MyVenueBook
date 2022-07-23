@@ -1,0 +1,84 @@
+.payment-receipt-home{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    padding:10rem 2.8rem;
+    background: #fff;
+}
+.payment-receipt-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.payment-receipt-home .navigator p{
+    font-size:1.8rem;
+    color:lightseagreen;
+}
+.payment-receipt-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.payment-receipt-home .paymentsuccessmsg{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:1rem;
+}
+.payment-receipt-home .paymentsuccessmsg h1{
+    color:  #0de00d;
+    font-size: 4rem;
+    text-transform: none;
+}
+.payment-receipt-home .paymentreceiptcontainer{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.payment-receipt-home .paymentreceiptcontainer table{
+    width:40%;
+}
+.payment-receipt-home .paymentreceiptcontainer table .colorone{
+    background:lightgreen;
+}
+.payment-receipt-home .paymentreceiptcontainer table .colortwo{
+    background:#eee;
+}
+.payment-receipt-home .paymentreceiptcontainer table td{
+    padding:2rem .5rem;
+    font-size:2rem;
+}
+.centeraligned{
+    text-align: center;
+}
+.payment-receipt-home .buttoncontainer{
+    width:100%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.payment-receipt-home .buttoncontainer div{
+    padding:1rem;
+}
+.payment-receipt-home .buttoncontainer a{
+    display: inline-block;
+    width: 20rem;
+    padding:1rem 0rem;
+    background-color: #0098a1;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    height:4.5rem;
+}
+.payment-receipt-home .buttoncontainer a:hover{
+    background-color: lightseagreen;
+    transform: scale(1.1);
+}

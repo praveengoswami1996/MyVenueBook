@@ -1,0 +1,155 @@
+.edit-venue-home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding:10rem 2.6rem;
+    background: #fff;
+}
+.edit-venue-home .navigator{
+    background-color: aliceblue;
+    height:4rem;
+    width:100%;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    padding-left:2rem;
+}
+.edit-venue-home .navigator p{
+    font-size:1.8rem;
+}
+.edit-venue-home .navigator p a{
+    text-decoration: underline;
+    font-family:'Times New Roman', Times, serif;
+}
+.edit-venue-home .heading-container{
+    width:100%;
+}
+.edit-venue-home .main-heading{
+    background-color: #0098a1;
+    color:#fff;
+    width:100%;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:3rem;
+    padding:0rem 0.8rem;
+    margin-top: 1.5rem;
+}
+.form-container{
+    width:100%;
+    margin-top:2rem;
+}
+.form-container form{
+    background-color:#fff;
+    border: .1rem solid #eee;
+    padding:2.5rem;
+    width:100%;
+    border-radius: .5rem;
+}
+.form-container form h3{
+    font-size: 3rem;
+    text-align: center;
+    color:#333;
+}
+.form-container form label{
+    font-size: 2.5rem;
+    margin: .2rem 0;
+    display:block;
+    color: #0098a1;
+}
+.form-container form input,
+.form-container form textarea,
+.form-container form select{
+    display: block;
+    text-transform:none;
+    font-size:1.8rem;
+    width:100%;
+    padding:.5rem;
+    border-radius: .5rem;
+    color:#333;
+    background: #eee;
+    border:none;
+    outline: none;
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.3) inset;
+}
+.form-container form input[type="submit"]{
+    margin-top: 2rem;
+    padding:.2rem;
+    background: navy;
+    font-size: 2rem;
+    color: #fff;
+}
+.form-container form input[type="submit"]:hover{
+    cursor: pointer;
+}
+.form-container form span{
+    font-size: 2rem;
+    margin: 0 1rem 2rem 1rem;
+    position:relative;
+    top:.1rem;
+}
+.form-container form input[type="radio"]{
+    box-shadow: none;
+    display: inline-block;
+    width:5%;
+}
+.form-container .image-div-container{
+    display:flex;
+    justify-content: center;
+    width:100%;
+    height:30rem;
+}
+.form-container .image-div-container .venue-image-container{
+    width:40%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    position:relative;
+}
+.form-container .image-div-container .venue-image-container img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 1.5rem;
+}
+.form-container .image-div-container .venue-image-container .plus-icon{
+    display:flex;
+    position:absolute;
+    bottom:.2rem;
+    right:50%;
+    transform: translate(50%);
+    width:95%;
+    height:95%;
+    margin-bottom:.7rem;    
+    overflow: hidden;
+    border-radius:1rem;
+    justify-content: center;
+    align-items: center;
+}
+.form-container .image-div-container .venue-image-container .plus-icon input[type="file"]{
+    position: absolute;
+    transform: scale(7.3);
+    opacity: 0;
+}
+.fa-circle-plus{
+    display: block;
+    color:#0098a1;
+    font-size:3rem;
+    background-color: #fff;
+    border:none;
+    outline: none;
+    border-radius: 50%;
+}
+.form-container .contact-field-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-container .contact-field-container select{
+    width:10%;
+    text-align: center;
+}
+.form-container .contact-field-container input{
+    width:88%;
+}

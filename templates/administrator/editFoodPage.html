@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Edit Food Page</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/editFoodPage.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="edit-food-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="http://localhost:8000/administrator/viewallfood/">View All Foods</a> / <a href="#">Edit Food</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Update Food Process</h1>
+        </div>
+
+        <div class="form-container">
+            <form action="http://localhost:8000/administrator/updatefood/" method="post" name="myform" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="image-div-container">
+                    <div class="food-image-container">
+                        {% if updatedFood.foodImage %}
+                        <img src="{{updatedFood.foodImage.url}}" alt="Food Image" id="foodimage">
+                        <input type="hidden" name="previousfoodimage" value="{{updatedFood.foodImage}}">
+                        {% else %}
+                        <img src="{{food.foodImage.url}}" alt="Food Image" id="foodimage">
+                        <input type="hidden" name="previousfoodimage" value="{{food.foodImage}}">
+                        {% endif %}
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="foodimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+                {% if updatedFood.foodId %}
+                <label for="foodid">Food Id </label>
+                <input type="text" id="foodid" name="foodid" value="{{updatedFood.foodId}}" readonly>
+                {% else %}
+                <label for="foodid">Food Id </label>
+                <input type="text" id="foodid" name="foodid" value="{{food.foodId}}" readonly>
+                {% endif %}
+
+                {% if food_Name_Error %}
+                <label for="foodname">Food Name </label>
+                <input style="border:.1rem solid red;" type="text" id="foodname" name="foodname" placeholder="Enter Food Name" value="{{updatedFood.foodName}}" required>
+                <span style="color:red; font-size:1.5rem ; text-transform: none;">{{food_Name_Error}}</span>
+                {% else %}
+                <label for="foodname">Food Name </label>
+                <input type="text" id="foodname" name="foodname" placeholder="Enter Food Name" value="{{food.foodName}}" required>
+                <span class="errormsg"></span>
+                {% endif %}
+
+                {% if updatedFood.foodCuisine %}
+                <label for="foodcuisine">Food Cuisine </label>
+                <select id="foodcuisine" name="foodcuisine" required>
+                    {% if updatedFood.foodCuisine == "Chinese" %}
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif updatedFood.foodCuisine == "Drink" %}
+                    <option value="Drink">Drink</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif updatedFood.foodCuisine == "Punjabi" %}
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    {% endif %}
+                </select>
+                {% else %}
+                <label for="foodcuisine">Food Cuisine </label>
+                <select id="foodcuisine" name="foodcuisine" required>
+                    {% if food.foodCuisine == "Chinese" %}
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif food.foodCuisine == "Drink" %}
+                    <option value="Drink">Drink</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% elif food.foodCuisine == "Punjabi" %}
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    {% else %}
+                    <option value="">---Select food cuisine---</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Punjabi">Punjabi</option>
+                    {% endif %}
+                </select>
+                {% endif %}
+                
+                {% if updatedFood.foodPricePerServing %}
+                <label for="foodpriceperserving">Food Price Per Serving </label>
+                <input type="text" id="foodpriceperserving" name="foodpriceperserving" placeholder="Enter food price per serving" value="{{updatedFood.foodPricePerServing}}" required >
+                {% else %}
+                <label for="foodpriceperserving">Food Price Per Serving </label>
+                <input type="text" id="foodpriceperserving" name="foodpriceperserving" placeholder="Enter food price per serving" value="{{food.foodPricePerServing}}" required >
+                <span class="errormsg"></span>
+                {% endif %}
+                
+                {% if food_Code_Error %}
+                <label for="foodcode">Food Code </label>
+                <input style="border:.1rem solid red;" type="text" id="foodcode" name="foodcode" placeholder="Create Food Code" value="{{updatedFood.foodCode}}" required>
+                <span style="color:red; font-size:1.5rem ; text-transform: none;">{{food_Code_Error}}</span>
+                {% else %}
+                <label for="foodcode">Food Code </label>
+                <input type="text" id="foodcode" name="foodcode" placeholder="Create Food Code" value="{{food.foodCode}}" required>
+                <span class="errormsg"></span>
+                {% endif %}
+                
+                <input type="submit" value="Update Food">
+            </form>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/editFoodPage.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

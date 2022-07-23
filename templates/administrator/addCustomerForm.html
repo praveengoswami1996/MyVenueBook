@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% extends 'administrator/adminMasterTemplate.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVBAdmin - Add Customer Process</title>
+    {% endblock title %}
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/administrator/addCustomerForm.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="add-customer-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/administrator/dashboard/">Dashboard</a> / <a href="#">Add Customer</a></p>
+        </div>
+        <div class="heading-container" >
+            <h1 class="main-heading">Add Customer Process</h1>
+        </div>
+
+        <div class="signup-form-container">
+            <form action="http://localhost:8000/administrator/addcustomer/" method="post" name="myform" enctype="multipart/form-data"  onsubmit="return validateForm()">
+                {% csrf_token %}
+
+                <!--Customer Image Field-->
+                <div class="image-div-container">
+                    <div class="profile-image-container">
+                        <img src="{% static 'image/No-Profile.png'%}" alt="Customer Profile Image" id="customerprofileimage">
+                        <div class="camera-icon">
+                            <input type="file" accept="image/*" name="customerprofileimage" id="file">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <label for="customername">Name </label>
+                <input type="text" id="customername" name="customername" placeholder="Enter customer's name" value="{{customer.customerName}}" required>
+                <label class="errormsg"></label>
+                
+                <label for="customerdob">Date of Birth </label>
+                <input type="date" id="customerdob" name="customerdob" value="{{customer.customerDob}}" required>
+
+                <label for="customergender">Gender </label>
+                {% if customer.customerGender == 'Male' %}
+                <span>Male</span><input type="radio" id="customergender" name="customergender" value="Male" required checked>
+                {% else %}
+                <span>Male</span><input type="radio" id="customergender" name="customergender" value="Male" required>
+                {% endif %}
+
+                {% if customer.customerGender == 'Female' %}
+                <span>Female</span><input type="radio" id="customergender" name="customergender" value="Female" required checked>
+                {% else %}
+                <span>Female</span><input type="radio" id="customergender" name="customergender" value="Female" required>
+                {% endif %}
+
+                {% if customer.customerGender == 'Other' %}
+                <span>Other</span><input type="radio" id="customergender" name="customergender" value="Other" required checked>
+                {% else %}
+                <span>Other</span><input type="radio" id="customergender" name="customergender" value="Other" required>
+                {% endif %}
+                
+
+                {% if email_error %}
+                <label for="customeremail">Email </label>
+                <input style="border:.1rem solid red;" type="text" id="customeremail" name="customeremail" placeholder="Enter a valid email ID" value="{{customer.customerEmail}}" required oninput="validateEmail()">
+                <label class="errormsg"
+                style="font-size:1.5rem; text-transform: none; color:red">{{email_error}}</label>
+                {% else %}
+                <label for="customeremail">Email </label>
+                <input type="text" id="customeremail" name="customeremail" placeholder="Enter a valid email ID" required oninput="validateEmail()">
+                <label class="errormsg"></label>
+                {% endif %}
+                
+                
+                {% if mobile_error %}
+                <label for="customermobile">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="customermobilecountrycode">
+                        <option value="+91">+91</option>
+                    </select>
+                    <input style="border:.1rem solid red;" type="text" id="customermobilenumber" name="customermobilenumber" placeholder="Enter 10 digit mobile number" value="{{customer.customerMobileNumber}}" required >
+                </div>
+                <label class="errormsg"
+                style="font-size:1.5rem; text-transform: none; color:red">{{mobile_error}}</label>
+                {% else %}
+                <label for="customermobile">Contact No. </label>
+                <div class="contact-field-container">
+                    <select name="customermobilecountrycode">
+                        <option value="+91">+91</option>
+                    </select>
+                    <input type="text" id="customermobilenumber" name="customermobilenumber" placeholder="Enter 10 digit mobile number" required >
+                </div>
+                <label class="errormsg"></label>
+                {% endif %}
+
+
+                <label for="customeraddress">Address </label>
+                <input type="text" id="customeraddress" name="customeraddress" placeholder="Enter customer's address" value="{{customer.customerAddress}}" required>
+                <label class="errormsg"></label>
+                
+
+                <div class="city-state-container">
+                    <div>
+                        <label for="customercity">City </label>
+                        <input type="text" id="customercity" name="customercity" placeholder="Enter customer's city name" value="{{customer.customerCity}}" required>
+                        <label class="errormsg"></label>
+                    </div>
+                    <div>
+                        <label for="customerstate">State </label>
+                        <input type="text" id="customerstate" name="customerstate" placeholder="Enter customer's state name" value="{{customer.customerState}}" required>
+                        <label class="errormsg"></label>
+                    </div>    
+                </div>
+                
+                <label for="customerpincode">Pincode </label>
+                <input type="text" id="customerpincode" name="customerpincode" placeholder="Enter customer's area pincode" value="{{customer.customerPincode}}" required>
+                <label class="errormsg"></label>
+                
+                {% if username_error %}
+                <label for="customerusername">Username </label>
+                <input style="border:.1rem solid red;" type="text" id="customerusername" name="customerusername" placeholder="Choose a username" value="{{customer.customerUsername}}" required value="{{customer.customerUsername}}" oninput="validateUsername()">
+                <label class="errormsg"
+                style="font-size:1.5rem; text-transform: none; color:red">{{username_error}}</label>
+                {% else %}
+                <label for="customerusername">Username </label>
+                <input type="text" id="customerusername" name="customerusername" placeholder="Choose a username" value="{{customer.customerUsername}}" required oninput="validateUsername()">
+                <label class="errormsg"></label>
+                {% endif %}
+
+                <label for="confirmusername">Confirm Username </label>
+                <input type="text" id="confirmusername" name="confirmusername" placeholder="Enter username again" required>
+                <label class="errormsg"></label>
+                              
+                <label for="customerpassword">Password </label>
+                <input type="password" id="customerpassword" name="customerpassword" placeholder="Choose a password" required>
+                
+                <label for="confirmpassword">Confirm Password </label>
+                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Enter password again" required>
+                <label class="errormsg"></label>
+                
+                <input type="submit" value="Add Customer">
+            </form>
+        </div>
+
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/administrator/addCustomerForm.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>

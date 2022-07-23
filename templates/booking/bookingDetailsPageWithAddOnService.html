@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Venue Booking Details & Add On Services</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/booking/bookingDetailsPageWithAddOnService.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="booking-details-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / Booking Details Page With Add-Ons</p>
+        </div>
+        <div class="booking-details-container">
+            <h1>Your Booking Details</h1>
+            <hr id="line" />
+            <table cellspacing="0" cellpadding="0">
+                <tr class="table-heading">
+                    <th>Booking ID</th>
+                    <th>Customer ID</th>
+                    <th>Venue ID</th>
+                    <th>Event Type</th>
+                    <th>Booking Date and Time</th>
+                    <th>Booking Start Date</th>
+                    <th>Booking End Date</th>
+                    <th>Total Booking Days</th>
+                    <th>Booking Status</th>
+                </tr>
+                <tr class="table-content">
+                    <td>{{booking_details.bookingId}}</td>
+                    <td>{{booking_details.customerId.customerId}}</td>
+                    <td>{{booking_details.venueId.venueId}}</td>
+                    <td>{{booking_details.eventType}}</td>
+                    <td>{{booking_details.bookingDateTime}}</td>
+                    <td>{{booking_details.bookingStartDate}}</td>
+                    <td>{{booking_details.bookingEndDate}}</td>
+                    <td>{{booking_details.bookingDays}}</td>
+                    <td>{{booking_details.bookingStatus}}</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <a href="#" id="cancelbookingbutton" class="button">Cancel Booking</a>
+                <a href="http://localhost:8000/payment/paymentform/{{booking_details.bookingId}}" id="paymentbutton" class="button">Proceed to Billing</a>
+            </div>
+        </div>
+        <div class="addon-service-container">
+            <h1>Avail Add On Services (Optional)</h1>
+            <hr id="line"/>
+            <div class="food-services-container">
+                <h2>Food Services</h2>
+                <h4>Punjabi Cuisine</h4>
+                    <div class="food-card-container">
+                    {% for food in punjabi_food %}
+                        <div class="dynamic-food-container">
+                            <img src="{{food.foodImage.url}}" alt="Punjabi Food Image">
+                            <p class="food-name">{{food.foodName}}</p>
+                            <p class="food-price">Price per serving : {{food.foodPricePerServing}}</p>
+                            <form action="http://localhost:8000/booking/addonfood/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="foodid" value="{{food.foodId}}" hidden>
+                                <input type="text" name="bookingid" value="{{booking_details.bookingId}}" hidden>
+                                <input class="add-button" type="submit" value="Add Food">        
+                            </form>
+                        </div>
+                    {% endfor %}
+                    </div>
+                <h4>Chinese Cuisine</h4>
+
+                    <div class="food-card-container">
+                    {% for food in chinese_food %}
+                        <div class="dynamic-food-container">
+                            <img src="{{food.foodImage.url}}" alt="Chinese Food Image">
+                            <p class="food-name">{{food.foodName}}</p>
+                            <p class="food-price">Price per serving : {{food.foodPricePerServing}}</p>
+                            <form action="http://localhost:8000/booking/addonfood/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="foodid" value="{{food.foodId}}" hidden>
+                                <input type="text" name="bookingid" value="{{booking_details.bookingId}}" hidden>
+                                <input class="add-button" type="submit" value="Add Food">        
+                            </form>
+                        </div>
+                    {% endfor %}
+                    </div>
+                <h4>Drinks / Beverages</h4>
+                    <div class="food-card-container">
+                    {% for drink in drinks %}
+                        <div class="dynamic-food-container">
+                            <img src="{{drink.foodImage.url}}" alt="Beverage Image">
+                            <p class="food-name">{{drink.foodName}}</p>
+                            <p class="food-price">Price per serving : {{drink.foodPricePerServing}}</p>
+                            <form action="http://localhost:8000/booking/addonfood/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="foodid" value="{{drink.foodId}}" hidden>
+                                <input type="text" name="bookingid" value="{{booking_details.bookingId}}" hidden>
+                                <input class="add-button" type="submit" value="Add Food">        
+                            </form>
+                        </div>
+                    {% endfor %}
+                    </div>
+            </div>
+            <div class="dancefloor-container">
+                <h2>Dance Floor + DJ Services</h2>
+                    <div class="dancefloor-card-container">
+                    {% for floor in dance_floor %}
+                        <div class="dynamic-floor-container">
+                            <img src="{{floor.danceFloorImage.url}}" alt="Dance Floor Image">
+                            <p class="floor-name">{{floor.danceFloorType}}</p>
+                            <p class="floor-price">Price per Booking : {{floor.danceFloorPricePerBooking}}</p>
+                            <form action="http://localhost:8000/booking/addondancefloor/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="dancefloorid" value="{{floor.danceFloorId}}" hidden>
+                                <input type="text" name="bookingid" value="{{booking_details.bookingId}}" hidden>
+                                <input class="add-button" type="submit" value="Add Dance Floor">        
+                            </form>
+                        </div>
+                    {% endfor %}
+                    </div>
+            </div>
+        </div>
+        <div class="payment-button-container">
+            <a class="button" id="paymentbutton" href="http://localhost:8000/payment/billingprocess/{{booking_details.bookingId}}">Proceed to Billing</a>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <!--Code to reload webpage at same(last) position-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                var scrollpos = localStorage.getItem('scrollpos');
+                if (scrollpos) window.scrollTo(0, scrollpos);
+            });
+    
+            window.onbeforeunload = function(e) {
+                localStorage.setItem('scrollpos', window.scrollY);
+            };
+        </script>    
+    {% endblock JS %}
+</body>
+</html>

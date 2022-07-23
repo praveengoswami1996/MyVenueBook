@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends 'customer/customerMasterTemplate.html'%}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>MVB - Payment Receipt</title>
+    {% endblock title %}
+    <!--Font Awesome cdn file link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!--Custom CSS file link-->
+    {% block CSS %}
+        {{block.super}}
+        <link rel="stylesheet" href="{% static 'css/payment/paymentReceiptPage.css' %}">
+    {% endblock CSS %}
+</head>
+<body>
+    <!--home section starts-->
+    {% block home %}
+    <section class="payment-receipt-home" id="home">
+        <div class="navigator">
+            <p><a href="http://localhost:8000/customer/dashboard/">Dashboard</a> / Payment Receipt</p>
+        </div>
+        <div class="paymentsuccessmsg">
+            <h1><i class="fa-regular fa-circle-check"></i> Your payment was successful.</h1>
+        </div>
+        <div class="paymentreceiptcontainer">
+            <table>
+                <tr class="colorone">
+                    <td>Payment ID</td>
+                    <td class="centeraligned">{{payment.paymentId}}</td>
+                </tr>
+                <tr class="colortwo">
+                    <td>Payment Amount</td>
+                    <td class="centeraligned">{{payment.paymentAmount}}</td>
+                </tr>
+                <tr class="colorone">
+                    <td>Payment Date</td>
+                    <td class="centeraligned">{{payment.paymentDate}}</td>
+                </tr>
+                <tr class="colortwo">
+                    <td>Payment Time</td>
+                    <td class="centeraligned">{{payment.paymentTime}}</td>
+                </tr>
+                <tr class="colorone">
+                    <td>Payment Mode</td>
+                    <td class="centeraligned">{{payment.paymentMode}}</td>
+                </tr>
+                <tr class="colortwo">
+                    <td>Payment Status</td>
+                    <td class="centeraligned">{{payment.paymentStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="buttoncontainer">
+            <div><a href="http://localhost:8000/customer/dashboard/">Back to dashboard</a></div>
+            <div><a href="#">Print Receipt</a></div>
+            <div><a href="http://localhost:8000/customer/feedbackform/">Give Feedback</a></div>
+        </div>
+    </section>
+    {% endblock home %}
+    <!--home section ends-->
+
+    <!--Custom JS File Link-->
+    {% block JS %}
+        {{block.super}}
+        <script src="{% static 'javascript/payment/allPayment.js' %}"></script>
+    {% endblock JS %}
+</body>
+</html>
